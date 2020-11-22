@@ -1,4 +1,4 @@
-package com.yishenghuo.schedule.Model;
+package com.maureen.schedule.bean;
 
 /**
  * Created by ihome on 2017/10/18.
@@ -15,29 +15,16 @@ package com.yishenghuo.schedule.Model;
  * beginTime 上课时间
  * length 节数
  */
-public class CourseModel {
+public class CourseBean {
     private String name;
     private String classroom;
     private String teacher;
     private String weekTime;
-    private int weekType;
+    private int weekType = 0;
     private int beginWeek;
     private int endWeek;
     private int beginTime;
     private int length;
-
-    public CourseModel(String name, String classroom, String teacher, String weekTime,
-                       int weekType, int beginWeek, int endWeek, int beginTime, int length) {
-        this.name = name;
-        this.classroom = classroom;
-        this.teacher = teacher;
-        this.weekTime = weekTime;
-        this.weekType = weekType;
-        this.beginWeek = beginWeek;
-        this.endWeek = endWeek;
-        this.beginTime = beginTime;
-        this.length = length;
-    }
 
     public String getName() {
         return name;

@@ -9,11 +9,20 @@
     </style>
 
     <style name="week">
-        <item name="android:background">@color/week_background</item>
+        <item name="android:background">@color/weekBackground</item>
         <item name="android:gravity">center</item>
-
     </style>
-    <style name="spinner" parent="Widget.AppCompat.DropDownItem.Spinner">
 
+    <style name="ToolBar">
+        <item name="colorControlNormal">@color/white</item>
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="settingLayout">
+        <item name="android:textSize">18sp</item>
+        <item name="android:background">@color/white</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:padding">10dp</item>
     </style>
 </resources>

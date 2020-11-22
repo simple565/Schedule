@@ -23,6 +23,16 @@
     <string name="odd">单周</string>
     <string name="even">双周</string>
 
+    <array name="colors">
+        <item>course_bg_blue</item>
+        <item>course_bg_brown</item>
+        <item>course_bg_cyan</item>
+        <item>course_bg_green</item>
+        <item>course_bg_orange</item>
+        <item>course_bg_pink</item>
+        <item>course_bg_purple</item>
+        <item>course_bg_yellow</item>
+    </array>
 
     <string-array name="week">
         <item>周一</item>
