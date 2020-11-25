@@ -1,13 +1,13 @@
 package com.maureen.schedule.utils;
 
+import androidx.annotation.NonNull;
+
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-
-import androidx.annotation.NonNull;
 
 /**
  * Function: 时间日期工具类
@@ -57,8 +57,8 @@ public class TimeUtil {
         for (int i = 0; i < weekLength; i++) {
             calendar.set(Calendar.DAY_OF_WEEK, firstDayOfWeek + i);
             WeekDay weekDay = new WeekDay();
-            weekDay.date = new SimpleDateFormat("dd", Locale.CHINA).format(calendar.getTime());
-            weekDay.weekIndex = new SimpleDateFormat("E", Locale.getDefault()).format(calendar.getTime());
+            weekDay.setDate(new SimpleDateFormat("dd", Locale.CHINA).format(calendar.getTime()));
+            weekDay.setWeekIndex(new SimpleDateFormat("E", Locale.CHINA).format(calendar.getTime()));
             System.out.println(weekDay.toString());
             list.add(weekDay);
         }
@@ -66,9 +66,25 @@ public class TimeUtil {
         return list;
     }
 
-    private static class WeekDay {
+    public static class WeekDay {
         private String weekIndex;
         private String date;
+
+        public String getWeekIndex() {
+            return weekIndex;
+        }
+
+        public void setWeekIndex(String weekIndex) {
+            this.weekIndex = weekIndex;
+        }
+
+        public String getDate() {
+            return date;
+        }
+
+        public void setDate(String date) {
+            this.date = date;
+        }
 
         @NonNull
         @Override
