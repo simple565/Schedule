@@ -34,7 +34,7 @@
         <item>course_bg_yellow</item>
     </array>
 
-    <string-array name="week">
+    <string-array name="weekDay">
         <item>周一</item>
         <item>周二</item>
         <item>周三</item>

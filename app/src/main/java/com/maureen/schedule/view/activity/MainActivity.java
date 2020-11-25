@@ -7,22 +7,17 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.maureen.schedule.R;
-import com.maureen.schedule.bean.CourseBean;
+import com.maureen.schedule.data.CourseInfoBean;
 import com.maureen.schedule.utils.InfoUtil;
 import com.maureen.schedule.utils.TimeUtil;
 import com.maureen.schedule.view.AddCourseDialog;
 
-import org.angmarch.views.NiceSpinner;
-
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
     private AddCourseDialog addCourseDialog;
@@ -32,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     private int course_width;
     //课表高度
     private int course_height;
-    private List<CourseBean> courseBeanList = new ArrayList<>();
+    private List<CourseInfoBean> mCourseInfoBeanList = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,18 +39,14 @@ public class MainActivity extends AppCompatActivity {
 
     protected void iniView() {
         //日期
-        TextView dateTv = (TextView) findViewById(R.id.tv_date);
-        dateTv.setText(TimeUtil.getDate());
+        TextView dateTv = (TextView) findViewById(R.id.main_tv_month);
+        dateTv.setText(TimeUtil.getCurrentMonth());
         //设置
         ImageButton settingsBtn = (ImageButton) findViewById(R.id.home_setting);
         settingsBtn.setOnClickListener(v -> {
         });
-        ImageButton moreBtn = (ImageButton) findViewById(R.id.main_more_menu);
-        DrawerLayout drawerLayout = (DrawerLayout) findViewById(R.id.main_drawer);
-        //moreBtn.setOnClickListener(v -> drawerLayout.openDrawer(Gravity.START));
-        //周数下拉菜单
-        NiceSpinner niceSpinner = findViewById(R.id.main_sp_week);
-        niceSpinner.attachDataSource(new LinkedList<>(Arrays.asList("第一周", "第二周")));
+
+
         //悬浮菜单
         FloatingActionButton floatingActionButton = (FloatingActionButton) findViewById(R.id.main_fab);
         addCourseDialog = new AddCourseDialog();
@@ -64,25 +55,27 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    //初始化日期，获得当前时间，周数
+    /**
+     * 初始化日期，获得当前时间，周数
+     */
     protected void iniDate() {
 
     }
 
     protected void iniCourseCard() {
-        CourseInfoDao courseInfoDao = new CourseInfoDao(this);
+       /* CourseInfoDao courseInfoDao = new CourseInfoDao(this);
         if (courseInfoDao.isTableExist()) {
-            courseBeanList = courseInfoDao.getCourseInfo();
+            mCourseInfoBeanList = courseInfoDao.getCourseInfo();
             //mtv_week_count.getText ().toString ()
             int nowWeek = InfoUtil.getNowWeek("6");
-            for (int i = 0; i < courseBeanList.size(); i++) {
-                int beginWeek = courseBeanList.get(i).getBeginWeek();
-                int endWeek = courseBeanList.get(i).getEndWeek();
-                int weekType = courseBeanList.get(i).getWeekType();
-                createCard(courseBeanList.get(i),
+            for (int i = 0; i < mCourseInfoBeanList.size(); i++) {
+                int beginWeek = mCourseInfoBeanList.get(i).getBeginWeek();
+                int endWeek = mCourseInfoBeanList.get(i).getEndWeek();
+                int weekType = mCourseInfoBeanList.get(i).getWeekType();
+                createCard(mCourseInfoBeanList.get(i),
                         InfoUtil.isOnWeek(beginWeek, endWeek, nowWeek, weekType));
             }
-        }
+        }*/
     }
 
     /**
@@ -127,14 +120,14 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 生成课程卡片
      */
-    protected void createCard(CourseBean courseBean, Boolean flag) {
+    protected void createCard(CourseInfoBean courseInfoBean, Boolean flag) {
         int number;//随机数，随机取颜色数组
         number = getPara();
-        String name = courseBean.getName();
-        String classroom = courseBean.getClassroom();
-        String weekTime = courseBean.getWeekTime();
-        int beginTime = courseBean.getBeginTime();
-        int length = courseBean.getLength();
+        String name = courseInfoBean.getName();
+        String classroom = courseInfoBean.getClassroom();
+        String weekTime = courseInfoBean.getWeekTime();
+        int beginTime = courseInfoBean.getBeginTime();
+        int length = courseInfoBean.getLength();
 
         //根据结束生成相应长度的格子
         int margin_top = course_height * (beginTime - 1);
@@ -161,11 +154,10 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 保存数据到数据库
      *
-     * @param courseBean 课程信息模型
+     * @param courseInfoBean 课程信息模型
      */
-    protected void safeCourseInfo(CourseBean courseBean) {
-        CourseInfoDao courseInfoDao = new CourseInfoDao(this);
-        courseInfoDao.insert(courseBean);
+    protected void safeCourseInfo(CourseInfoBean courseInfoBean) {
+
     }
 
 
@@ -176,11 +168,10 @@ public class MainActivity extends AppCompatActivity {
         endTime = InfoUtil.getEndTime(period, endTime);
         //判断填写信息符合标准后保存课程信息到数据库
         if (InfoUtil.isLegal(beginTime, endTime, beginWeek, endWeek).equals(" ")) {
-            CourseBean courseBean = new CourseBean(name, classroom, teacher, weekTime, weekType,
-                    beginWeek, endWeek, beginTime, length);
-            courseBeanList.add(courseBean);
-            safeCourseInfo(courseBean);
-            createCard(courseBean, true);
+            CourseInfoBean courseInfoBean = new CourseInfoBean();
+            mCourseInfoBeanList.add(courseInfoBean);
+            safeCourseInfo(courseInfoBean);
+            createCard(courseInfoBean, true);
         } else {
             Toast.makeText(this, InfoUtil.isLegal(beginTime, endTime, beginWeek, endWeek), Toast.LENGTH_SHORT).show();
         }

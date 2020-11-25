@@ -8,7 +8,7 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="week">
+    <style name="weekDay">
         <item name="android:background">@color/weekBackground</item>
         <item name="android:gravity">center</item>
     </style>

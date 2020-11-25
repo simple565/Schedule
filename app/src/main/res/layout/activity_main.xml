@@ -1,25 +1,63 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_drawer"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <LinearLayout
-        android:layout_width="250dp"
-        android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="@color/white"
-        android:orientation="vertical" />
+    <RelativeLayout
+        android:id="@+id/main_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/main_tv_current_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            tools:ignore="RelativeOverlap"
+            tools:text="第一周" />
+
+        <ImageButton
+            android:id="@+id/home_setting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_setting"
+            android:contentDescription="设置"
+            tools:ignore="HardcodedText" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/main_tv_month"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:gravity="center"
+        android:textColor="@color/textColorPrimary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_tool_bar"
+        tools:text="11月" />
+
+    <ListView
+        android:id="@+id/main_lv_week"
+        android:layout_width="wrap_content"
+        android:layout_height="40dp"
+        android:background="@color/colorAccent"
+        app:layout_constraintStart_toEndOf="@id/main_tv_month"
+        app:layout_constraintTop_toBottomOf="@id/main_tool_bar" />
 
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-
-        <include
-            layout="@layout/activity_table"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/main_fab"
@@ -29,11 +67,12 @@
             android:layout_margin="20dp"
             android:elevation="4dp"
             android:src="@drawable/ic_add"
-            app:backgroundTint="@color/weekBackground"
+            app:backgroundTint="@color/colorAccent"
             app:fabSize="auto"
             app:pressedTranslationZ="12dp"
-            app:rippleColor="@color/colorPrimaryDark" />
+            app:rippleColor="@color/colorPrimaryDark"
+            tools:ignore="ContentDescription" />
     </FrameLayout>
 
 
-</androidx.drawerlayout.widget.DrawerLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

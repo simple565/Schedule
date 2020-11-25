@@ -83,7 +83,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="2"
-                android:entries="@array/week" />
+                android:entries="@array/weekDay" />
 
             <RadioGroup
                 android:id="@+id/add_course_rgb_week_type"

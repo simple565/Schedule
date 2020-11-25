@@ -11,11 +11,11 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import com.maureen.schedule.R;
+import com.maureen.schedule.data.CourseInfoBean;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
-
-import com.maureen.schedule.R;
-import com.maureen.schedule.bean.CourseBean;
 
 /**
  * @author Lianml
@@ -23,7 +23,7 @@ import com.maureen.schedule.bean.CourseBean;
  */
 public class AddCourseDialog extends DialogFragment implements RadioGroup.OnCheckedChangeListener, AdapterView.OnItemSelectedListener {
     private static final String TAG = "AddCourseDialog";
-    private CourseBean mCourseBean;
+    private CourseInfoBean mCourseInfoBean;
     private EditText mCourseNameEdt, mCourseTeacherEdt, mCourseClassroomEdt;
 
     @Override
@@ -72,18 +72,18 @@ public class AddCourseDialog extends DialogFragment implements RadioGroup.OnChec
     public void onCheckedChanged(RadioGroup group, int checkedId) {
         if (checkedId == R.id.add_course_radio_odd) {
             //单周
-            mCourseBean.setWeekType(1);
+            mCourseInfoBean.setWeekType(1);
         } else if (checkedId == R.id.add_course_radio_even) {
             //双周
-            mCourseBean.setWeekType(2);
+            mCourseInfoBean.setWeekType(2);
         }
     }
 
     private void saveCourseInfo() {
         //处理需要传递的数据
-        mCourseBean.setName(mCourseNameEdt.getText().toString().trim());
-        mCourseBean.setClassroom(mCourseClassroomEdt.getText().toString().trim());
-        mCourseBean.setTeacher(mCourseTeacherEdt.getText().toString().trim());
+        mCourseInfoBean.setName(mCourseNameEdt.getText().toString().trim());
+        mCourseInfoBean.setClassroom(mCourseClassroomEdt.getText().toString().trim());
+        mCourseInfoBean.setTeacher(mCourseTeacherEdt.getText().toString().trim());
         /*sendInfo.onSendDialogInfo(name, classroom, teacher, weekTime, period, weekType,
                 beginWeek, endWeek, beginTime, endTime);*/
     }

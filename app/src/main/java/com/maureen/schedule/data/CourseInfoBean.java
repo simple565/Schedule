@@ -1,30 +1,65 @@
-package com.maureen.schedule.bean;
+package com.maureen.schedule.data;
+
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 /**
- * Created by ihome on 2017/10/18.
+ * Function:
+ * Create 2017/10/18.
+ *
+ * @author lianml
  */
+@Entity(tableName = "course")
+public class CourseInfoBean {
 
-/**
- * name 课程名称
- * classroom 教室
- * teacher 教师
- * weekTime 周X
- * weekType 单双周 1-单周 2-双周 0-普通
- * beginWeek 开课周数
- * endWeek 结课周数
- * beginTime 上课时间
- * length 节数
- */
-public class CourseBean {
+
+    @PrimaryKey(autoGenerate = true)
+    private int id;
+
+    /**
+     * name 课程名称
+     */
     private String name;
+    /**
+     * classroom 教室
+     */
     private String classroom;
+    /**
+     * teacher 教师
+     */
     private String teacher;
+    /**
+     * weekTime 周X
+     */
     private String weekTime;
+    /**
+     * weekType 单双周 1-单周 2-双周 0-普通
+     */
     private int weekType = 0;
+    /**
+     * beginWeek 开课周数
+     */
     private int beginWeek;
+    /**
+     * endWeek 结课周数
+     */
     private int endWeek;
+    /**
+     * beginTime 上课时间
+     */
     private int beginTime;
+    /**
+     * length 节数
+     */
     private int length;
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
 
     public String getName() {
         return name;
