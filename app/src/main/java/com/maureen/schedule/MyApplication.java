@@ -1,10 +1,8 @@
 package com.maureen.schedule;
 
+import android.annotation.SuppressLint;
 import android.app.Application;
-
-import com.maureen.schedule.data.AppDatabase;
-
-import androidx.room.Room;
+import android.content.Context;
 
 /**
  * Function:
@@ -14,17 +12,16 @@ import androidx.room.Room;
  */
 public class MyApplication extends Application {
 
-    private AppDatabase mAppDatabase;
+    @SuppressLint("StaticFieldLeak")
+    private static Context mContext;
+
+    public static Context getAppContext() {
+        return mContext;
+    }
 
     @Override
     public void onCreate() {
         super.onCreate();
-        mAppDatabase = Room.databaseBuilder(getApplicationContext(), AppDatabase.class, "TimeTable.db")
-                .allowMainThreadQueries()
-                .build();
-    }
-
-    public AppDatabase getAppDatabase() {
-        return mAppDatabase;
+        mContext = getApplicationContext();
     }
 }

@@ -40,13 +40,11 @@
             android:text="@string/time"
             android:textSize="16sp" />
 
-
         <LinearLayout
             android:id="@+id/layout_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/tv_class_time"
-            android:orientation="horizontal">
+            android:layout_toEndOf="@id/tv_class_time">
 
             <Spinner
                 android:id="@+id/add_course_spinner_period"
@@ -55,21 +53,6 @@
                 android:layout_weight="1"
                 android:entries="@array/period"
                 android:spinnerMode="dropdown" />
-
-            <Spinner
-                android:id="@+id/add_course_spinner_week"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/weekDay" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/layout_time"
-            android:layout_toEndOf="@id/tv_class_time">
 
             <Spinner
                 android:id="@+id/add_course_spinner_start_time"
@@ -85,10 +68,79 @@
                 android:layout_weight="1"
                 android:entries="@array/course_count" />
 
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/layout_time"
+            android:layout_toEndOf="@id/tv_class_time"
+            android:orientation="horizontal">
+
+            <Spinner
+                android:id="@+id/add_course_spinner_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:entries="@array/weekDay" />
+
+            <RadioGroup
+                android:id="@+id/add_course_rgb_week_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="3"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/add_course_radio_even"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/even" />
+
+                <RadioButton
+                    android:id="@+id/add_course_radio_odd"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/odd" />
+            </RadioGroup>
+
         </LinearLayout>
 
 
     </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/startWeek" />
+
+        <Spinner
+            android:id="@+id/add_course_spinner_start_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/week_count" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/endWeek" />
+
+        <Spinner
+            android:id="@+id/add_course_spinner_end_week"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:entries="@array/week_count" />
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
