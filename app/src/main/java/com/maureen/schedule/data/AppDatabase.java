@@ -1,10 +1,10 @@
 package com.maureen.schedule.data;
 
-import com.maureen.schedule.MyApplication;
-
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+
+import com.maureen.schedule.MyApplication;
 
 /**
  * Function:
@@ -24,7 +24,6 @@ public abstract class AppDatabase extends RoomDatabase {
                     mInstance = Room.databaseBuilder(MyApplication.getAppContext(), AppDatabase.class, DATABASE_NAME)
                             .allowMainThreadQueries()
                             .build();
-
                 }
             }
         }

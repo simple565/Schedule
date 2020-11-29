@@ -6,16 +6,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.RadioGroup;
-import android.widget.Spinner;
-
-import com.maureen.schedule.CourseViewModel;
-import com.maureen.schedule.R;
-import com.maureen.schedule.data.CourseInfoBean;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
+
+import com.maureen.schedule.CourseViewModel;
+import com.maureen.schedule.R;
+import com.maureen.schedule.data.CourseInfoBean;
 
 /**
  * Function:
@@ -39,10 +38,10 @@ public class EditCourseFragment extends Fragment implements RadioGroup.OnChecked
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         RadioGroup weekTypeRgb = view.findViewById(R.id.add_course_rgb_week_type);
         weekTypeRgb.setOnCheckedChangeListener(this);
-        Spinner startWeekSpinner = view.findViewById(R.id.add_course_spinner_start_week);
+        /*Spinner startWeekSpinner = view.findViewById(R.id.add_course_spinner_start_week);
         startWeekSpinner.setOnItemSelectedListener(this);
         Spinner endWeekSpinner = view.findViewById(R.id.add_course_spinner_end_week);
-        endWeekSpinner.setOnItemSelectedListener(this);
+        endWeekSpinner.setOnItemSelectedListener(this);*/
     }
 
     @Override
@@ -55,11 +54,11 @@ public class EditCourseFragment extends Fragment implements RadioGroup.OnChecked
 
         } else if (parent.getId() == R.id.add_course_spinner_end_time) {
 
-        } else if (parent.getId() == R.id.add_course_spinner_start_week) {
+        } /*else if (parent.getId() == R.id.add_course_spinner_start_week) {
 
         } else if (parent.getId() == R.id.add_course_spinner_end_week) {
 
-        }
+        }*/
     }
 
     @Override
@@ -72,11 +71,11 @@ public class EditCourseFragment extends Fragment implements RadioGroup.OnChecked
 
         } else if (parent.getId() == R.id.add_course_spinner_end_time) {
 
-        } else if (parent.getId() == R.id.add_course_spinner_start_week) {
+        } /*else if (parent.getId() == R.id.add_course_spinner_start_week) {
 
         } else if (parent.getId() == R.id.add_course_spinner_end_week) {
 
-        }
+        }*/
     }
 
     @Override

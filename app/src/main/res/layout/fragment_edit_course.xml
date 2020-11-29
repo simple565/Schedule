@@ -121,25 +121,12 @@
             android:layout_weight="1"
             android:text="@string/startWeek" />
 
-        <Spinner
-            android:id="@+id/add_course_spinner_start_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/week_count" />
-
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/endWeek" />
 
-        <Spinner
-            android:id="@+id/add_course_spinner_end_week"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:entries="@array/week_count" />
     </LinearLayout>
 
     <RelativeLayout

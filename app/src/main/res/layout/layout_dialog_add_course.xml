@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
@@ -10,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/name"
+        android:importantForAutofill="no"
         android:inputType="text"
         android:maxLines="1" />
 
@@ -18,13 +20,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="@string/classroom"
+        android:importantForAutofill="no"
+        android:inputType="text"
         android:maxLines="1" />
 
     <EditText
         android:id="@+id/add_course_teacher"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/teacher" />
+        android:hint="@string/teacher"
+        android:importantForAutofill="no"
+        android:inputType="text" />
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -49,19 +55,19 @@
             android:orientation="horizontal">
 
             <Spinner
-                android:id="@+id/add_course_spinner_period"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/period"
-                android:spinnerMode="dropdown" />
-
-            <Spinner
                 android:id="@+id/add_course_spinner_week"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/weekDay" />
+
+            <Spinner
+                android:id="@+id/add_course_spinner_period"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:entries="@array/period"
+                android:spinnerMode="dropdown" />
 
         </LinearLayout>
 
@@ -73,14 +79,14 @@
 
             <Spinner
                 android:id="@+id/add_course_spinner_start_time"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/course_count" />
 
             <Spinner
                 android:id="@+id/add_course_spinner_end_time"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:entries="@array/course_count" />
@@ -99,15 +105,20 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:padding="10dp"
-            android:text="@string/save" />
+            android:paddingStart="12dp"
+            android:paddingTop="12dp"
+            android:paddingBottom="12dp"
+            android:text="@string/save"
+            android:textSize="16sp"
+            tools:ignore="RtlSymmetry" />
 
         <TextView
             android:id="@+id/add_course_tv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_toStartOf="@id/add_course_tv_submit"
-            android:padding="10dp"
-            android:text="@string/cancel" />
+            android:padding="12dp"
+            android:text="@string/cancel"
+            android:textSize="16sp" />
     </RelativeLayout>
 </LinearLayout>

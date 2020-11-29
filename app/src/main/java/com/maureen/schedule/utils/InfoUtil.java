@@ -1,5 +1,9 @@
 package com.maureen.schedule.utils;
 
+import android.content.Context;
+
+import com.maureen.schedule.R;
+
 /**
  * Created by ihome on 2017/11/19.
  * 工具类
@@ -60,30 +64,16 @@ public class InfoUtil {
         return result;
     }
 
-    public static int getNowWeek(String string) {
-        int weekday = 1;
-        if (string.contains("一")) {
-            weekday = 1;
+    public static int getWeekDay(Context context, String dayOfWeek) {
+        int weekdayIndex = 0;
+        String[] weekDays = context.getResources().getStringArray(R.array.weekDay);
+        for (int i = 0; i < weekDays.length; i++) {
+            if (weekDays[i].equals(dayOfWeek)) {
+                weekdayIndex = i;
+                break;
+            }
         }
-        if (string.contains("二")) {
-            weekday = 2;
-        }
-        if (string.contains("三")) {
-            weekday = 3;
-        }
-        if (string.contains("四")) {
-            weekday = 4;
-        }
-        if (string.contains("五")) {
-            weekday = 5;
-        }
-        if (string.contains("六")) {
-            weekday = 6;
-        }
-        if (string.contains("日")) {
-            weekday = 7;
-        }
-        return weekday;
+        return weekdayIndex;
     }
 
 
