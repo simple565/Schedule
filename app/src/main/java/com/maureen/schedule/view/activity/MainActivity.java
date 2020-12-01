@@ -12,6 +12,7 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.ViewModelProvider;
@@ -31,12 +32,13 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Context mContext;
-    private List<CourseInfoBean> mCourseInfoBeanList = null;
     private AddCourseDialog mAddCourseDialog;
+    private List<TextView> mCourseItemViews;
     private TextView mCurWeekIndexTv;
     private TextView mMonthTv;
     private String mWeekIndex, mMonthIndex;
     private CourseViewModel mCourseViewModel;
+    private GridLayout mTableLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,18 +87,10 @@ public class MainActivity extends AppCompatActivity {
             view.setText(String.valueOf(i + 1));
             countLayout.addView(view);
         }
-        List<CourseInfoBean> list = new ArrayList<>();
 
-        CourseInfoBean courseInfoBean = new CourseInfoBean();
-        courseInfoBean.setName("测试数据");
-        courseInfoBean.setLength(2);
-        courseInfoBean.setBeginTime(8);
-        courseInfoBean.setWeekTime("周三");
-        list.add(courseInfoBean);
-
-        GridLayout gridLayout = findViewById(R.id.main_gl_table);
-        gridLayout.setColumnCount(7);
-        gridLayout.setRowCount(9);
+        mTableLayout = findViewById(R.id.main_gl_table);
+        mTableLayout.setColumnCount(7);
+        mTableLayout.setRowCount(9);
         for (int i = 1; i <= 7; i++) {
             for (int j = 1; j <= 9; j++) {
                 TextView courseInfoView = new TextView(mContext);
@@ -107,20 +101,22 @@ public class MainActivity extends AppCompatActivity {
                 layoutParams.height = 0;
                 layoutParams.width = 0;
                 layoutParams.setGravity(Gravity.FILL);
-                gridLayout.addView(courseInfoView, layoutParams);
+                courseInfoView.setLayoutParams(layoutParams);
+                mTableLayout.addView(courseInfoView);
             }
-        }
-        for (CourseInfoBean courseInfo : list) {
-            gridLayout.addView(genCourseItemView(courseInfo));
         }
     }
 
     private void initData() {
+        mCourseItemViews = new ArrayList<>();
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         mWeekIndex = "第一周";
         mMonthIndex = DateUtil.getCurrentMonth();
         mCourseViewModel.getCourseInfoLiveData().observe(this, courseInfoBeans -> {
-            Log.d(TAG, "initData: " + courseInfoBeans.size());
+            if (courseInfoBeans.size() > 0) {
+                mTableLayout.addView(genCourseItemView(courseInfoBeans.get(courseInfoBeans.size() - 1)));
+            }
+
         });
     }
 
@@ -130,8 +126,9 @@ public class MainActivity extends AppCompatActivity {
         courseInfoView.setText(courseInfo.getName());
         courseInfoView.setTextColor(ContextCompat.getColor(mContext, R.color.white));
         courseInfoView.setBackgroundResource(R.drawable.course_bg_brown);
-        GridLayout.Spec rowSpec = GridLayout.spec(courseInfo.getBeginTime(), 1f * courseInfo.getLength());
-        GridLayout.Spec columnSpec = GridLayout.spec(InfoUtil.getWeekDay(mContext, courseInfo.getWeekTime()), 1f);
+        Log.d(TAG, "genCourseItemView: " + courseInfo.getBeginTime());
+        GridLayout.Spec rowSpec = GridLayout.spec(courseInfo.getBeginTime() - 1, courseInfo.getLength(), 1f);
+        GridLayout.Spec columnSpec = GridLayout.spec(InfoUtil.getWeekDay(mContext, courseInfo.getWeekTime()), 1, 1f);
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(rowSpec, columnSpec);
         layoutParams.height = 0;
         layoutParams.width = 0;
@@ -142,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
             showDeleteConfirmDialog(courseInfo);
             return false;
         });
+        mCourseItemViews.add(courseInfoView);
         return courseInfoView;
     }
 
@@ -151,6 +149,13 @@ public class MainActivity extends AppCompatActivity {
 
     private void showDeleteConfirmDialog(CourseInfoBean courseInfo) {
         Log.d(TAG, "showDeleteConfirmDialog: " + courseInfo.getName());
+        AlertDialog.Builder builder = new AlertDialog.Builder(mContext)
+                .setMessage("是否从课程表中移除该课程")
+                .setPositiveButton("删除", (dialog, which) -> {
+                    dialog.dismiss();
+                    mCourseViewModel.deleteCourseInfo(courseInfo);
+                }).setNegativeButton("取消", (dialog, which) -> dialog.dismiss());
+        builder.show();
     }
 
     private void showAddCourseDialog() {
