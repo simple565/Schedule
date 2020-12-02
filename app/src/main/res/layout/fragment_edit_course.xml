@@ -1,30 +1,88 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:padding="10dp">
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary" />
 
     <EditText
         android:id="@+id/add_course_name"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_white_with_corner"
+        android:elevation="5dp"
         android:hint="@string/name"
         android:inputType="text"
-        android:maxLines="1" />
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        tools:ignore="Autofill,RtlSymmetry" />
 
     <EditText
         android:id="@+id/add_course_classroom"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?actionBarSize"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_white_with_corner"
+        android:elevation="5dp"
         android:hint="@string/classroom"
-        android:maxLines="1" />
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingStart="10dp"
+        tools:ignore="Autofill,RtlSymmetry" />
 
     <EditText
         android:id="@+id/add_course_teacher"
         android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_white_with_corner"
+        android:elevation="5dp"
+        android:hint="@string/teacher"
+        android:inputType="text"
+        android:paddingStart="10dp"
+        tools:ignore="Autofill,RtlSymmetry" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="@string/teacher" />
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/startWeek" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/endWeek" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+    </LinearLayout>
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -36,7 +94,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:ems="2"
             android:text="@string/time"
             android:textSize="16sp" />
 
@@ -45,14 +102,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/tv_class_time">
-
-            <Spinner
-                android:id="@+id/add_course_spinner_period"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:entries="@array/period"
-                android:spinnerMode="dropdown" />
 
             <Spinner
                 android:id="@+id/add_course_spinner_start_time"
@@ -111,42 +160,36 @@
     </RelativeLayout>
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_margin="10dp"
         android:orientation="horizontal">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/startWeek" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:text="@string/endWeek" />
-
-    </LinearLayout>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <TextView
-            android:id="@+id/add_course_tv_submit"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:padding="10dp"
-            android:text="@string/save" />
 
         <TextView
             android:id="@+id/add_course_tv_cancel"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/add_course_tv_submit"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_white_with_corner"
+            android:elevation="5dp"
             android:padding="10dp"
-            android:text="@string/cancel" />
-    </RelativeLayout>
+            android:text="@string/add_period"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/add_course_tv_submit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:background="@drawable/bg_white_with_corner"
+            android:elevation="5dp"
+            android:padding="10dp"
+            android:text="@string/save"
+            android:textColor="@color/colorAccent"
+            android:textSize="16sp" />
+
+    </LinearLayout>
+
 </LinearLayout>

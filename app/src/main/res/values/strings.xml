@@ -1,8 +1,8 @@
 <resources>
     <string name="app_name">Schedule</string>
     <string name="cancel">取消</string>
-    <string name="save">保存</string>
-    <string name="add_widget">Add widget</string>
+    <string name="save">保存课程</string>
+    <string name="add_period">增加时间段</string>
     <string name="name">课程名称</string>
     <string name="teacher">教师</string>
     <string name="time">上课时间</string>

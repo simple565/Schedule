@@ -1,13 +1,13 @@
 package com.maureen.schedule.utils;
 
-import androidx.annotation.NonNull;
-
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+
+import androidx.annotation.NonNull;
 
 /**
  * Function: 时间日期工具类
@@ -48,8 +48,7 @@ public class DateUtil {
      *
      * @return
      */
-    public static List<WeekDay> getDayOfCurrentWeek() {
-        int weekLength = 7;
+    public static List<WeekDay> getDayOfCurrentWeek(int weekLength) {
         // 获取本周的第一天，从周一开始
         Calendar calendar = Calendar.getInstance(Locale.FRANCE);
         int firstDayOfWeek = calendar.getFirstDayOfWeek();

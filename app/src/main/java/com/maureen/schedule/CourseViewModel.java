@@ -1,12 +1,12 @@
 package com.maureen.schedule;
 
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.ViewModel;
-
 import com.maureen.schedule.data.AppDatabase;
 import com.maureen.schedule.data.CourseInfoBean;
 
 import java.util.List;
+
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.ViewModel;
 
 /**
  * Function:
@@ -25,8 +25,11 @@ public class CourseViewModel extends ViewModel {
         return mCourseInfoLiveData;
     }
 
-    public void saveCourseInfo(CourseInfoBean courseInfoBean) {
+    public CourseInfoBean findCourseById(int courseId) {
+        return AppDatabase.getInstance().getCourseInfoDao().getCourseInfoById(courseId);
+    }
 
+    public void saveCourseInfo(CourseInfoBean courseInfoBean) {
         AppDatabase.getInstance().getCourseInfoDao().saveCourseInfo(courseInfoBean);
     }
 
