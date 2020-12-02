@@ -29,7 +29,7 @@ public class CourseInfoBean {
      */
     private String teacher;
     /**
-     * weekTime 周X
+     * weekTime 周X 1-7
      */
     private String weekTime;
     /**

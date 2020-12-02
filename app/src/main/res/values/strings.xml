@@ -4,15 +4,16 @@
     <string name="save">保存课程</string>
     <string name="add_period">增加时间段</string>
     <string name="name">课程名称</string>
-    <string name="teacher">教师</string>
+    <string name="teacher">教师(选填)</string>
     <string name="time">上课时间</string>
-    <string name="morning">上午</string>
-    <string name="afternoon">下午</string>
-    <string name="classroom">教室</string>
+    <string name="classroom">教室(选填)</string>
     <string name="length">节数</string>
     <string name="type">单双周</string>
-    <string name="startWeek">开课周数</string>
-    <string name="endWeek">结课周数</string>
+    <string name="start_week">开课周数</string>
+    <string name="end_week">结课周数</string>
+    <string name="start_class_index">开始节次</string>
+    <string name="course_length">时长</string>
+    <string name="is_odd_week_or_even_week">是否单双周</string>
     <string name="odd">单周</string>
     <string name="even">双周</string>
 
@@ -37,11 +38,6 @@
         <item>周日</item>
     </string-array>
 
-    <string-array name="period">
-        <item>上午</item>
-        <item>下午</item>
-        <item>晚上</item>
-    </string-array>
     <string-array name="course_count">
         <item>1</item>
         <item>2</item>

@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -12,19 +13,18 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.maureen.schedule.CourseViewModel;
 import com.maureen.schedule.R;
 import com.maureen.schedule.data.CourseInfoBean;
 import com.maureen.schedule.utils.DateUtil;
 import com.maureen.schedule.utils.DisplayUtil;
-import com.maureen.schedule.utils.InfoUtil;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
 
 /**
  * @author lianml
@@ -103,7 +103,6 @@ public class MainActivity extends AppCompatActivity {
             if (courseInfoBeans.size() > 0) {
                 mTableLayout.addView(genCourseItemView(courseInfoBeans.get(courseInfoBeans.size() - 1)));
             }
-
         });
     }
 
@@ -137,7 +136,7 @@ public class MainActivity extends AppCompatActivity {
         courseInfoView.setTextColor(ContextCompat.getColor(mContext, R.color.white));
         courseInfoView.setBackgroundResource(R.drawable.course_bg_cyan);
         GridLayout.Spec rowSpec = GridLayout.spec(courseInfo.getBeginTime() - 1, courseInfo.getLength(), 1f);
-        GridLayout.Spec columnSpec = GridLayout.spec(InfoUtil.getWeekDay(mContext, courseInfo.getWeekTime()), 1, 1f);
+        GridLayout.Spec columnSpec = GridLayout.spec(Integer.parseInt(courseInfo.getWeekTime()) - 1, 1, 1f);
         GridLayout.LayoutParams layoutParams = new GridLayout.LayoutParams(rowSpec, columnSpec);
         layoutParams.height = 0;
         layoutParams.width = 0;
@@ -151,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
     private void jumpToEditCourseInfo(CourseInfoBean courseInfo) {
         Intent intent = new Intent(MainActivity.this, EditCourseActivity.class);
         if (null != courseInfo) {
+            Log.d(TAG, "jumpToEditCourseInfo: " + courseInfo.getId());
             intent.putExtra("CourseId", courseInfo.getId());
         }
         startActivity(intent);
