@@ -13,18 +13,21 @@ import android.widget.GridLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.lifecycle.ViewModelProvider;
-
 import com.maureen.schedule.CourseViewModel;
 import com.maureen.schedule.R;
 import com.maureen.schedule.data.CourseInfoBean;
 import com.maureen.schedule.utils.DateUtil;
 import com.maureen.schedule.utils.DisplayUtil;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * @author lianml
@@ -32,15 +35,14 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private static final String TAG = "MainActivity";
     private Context mContext;
-    private List<TextView> mCourseItemViews;
-    private TextView mCurWeekIndexTv;
+    private Map<Integer, TextView> mCourseItemViews;
     private TextView mMonthTv;
     private String mWeekIndex, mMonthIndex;
     private CourseViewModel mCourseViewModel;
     private GridLayout mTableLayout;
     private int mWeekLength = 7;
     private int mTotalCourCount = 10;
-
+    private AlertDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,9 +59,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initView() {
-        mCurWeekIndexTv = findViewById(R.id.main_tv_current_week);
+        Toolbar toolBar = findViewById(R.id.main_tool_bar);
+        toolBar.setPadding(0, DisplayUtil.getStatusBarHeight(mContext), 0, 0);
+        toolBar.setTitle(mWeekIndex);
         mMonthTv = findViewById(R.id.main_tv_month);
-        mCurWeekIndexTv.setText(mWeekIndex);
         mMonthTv.setText(mMonthIndex);
         // 初始化日期栏
         int weekDayViewWidth = (DisplayUtil.getScreenWidth(mContext) - DisplayUtil.dp2px(mContext, 32)) / 7;
@@ -95,14 +98,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-        mCourseItemViews = new ArrayList<>();
+        mCourseItemViews = new HashMap<>(70);
         mCourseViewModel = new ViewModelProvider(this).get(CourseViewModel.class);
         mWeekIndex = "第一周";
         mMonthIndex = DateUtil.getCurrentMonth();
         mCourseViewModel.getCourseInfoLiveData().observe(this, courseInfoBeans -> {
-            if (courseInfoBeans.size() > 0) {
-                mTableLayout.addView(genCourseItemView(courseInfoBeans.get(courseInfoBeans.size() - 1)));
-            }
+
         });
     }
 
@@ -132,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView genCourseItemView(CourseInfoBean courseInfo) {
         TextView courseInfoView = new TextView(mContext);
         courseInfoView.setGravity(Gravity.CENTER);
-        courseInfoView.setText(courseInfo.getName());
+        courseInfoView.setText(String.format("%1s@%2s", courseInfo.getName(), courseInfo.getClassroom()));
         courseInfoView.setTextColor(ContextCompat.getColor(mContext, R.color.white));
         courseInfoView.setBackgroundResource(R.drawable.course_bg_cyan);
         GridLayout.Spec rowSpec = GridLayout.spec(courseInfo.getBeginTime() - 1, courseInfo.getLength(), 1f);
@@ -143,7 +144,11 @@ public class MainActivity extends AppCompatActivity {
         layoutParams.setGravity(Gravity.FILL);
         courseInfoView.setLayoutParams(layoutParams);
         courseInfoView.setOnClickListener(v -> jumpToEditCourseInfo(courseInfo));
-        mCourseItemViews.add(courseInfoView);
+        courseInfoView.setOnLongClickListener(v -> {
+            showDeleteTipDialog(v, courseInfo);
+            return true;
+        });
+        mCourseItemViews.put(courseInfo.getId(), courseInfoView);
         return courseInfoView;
     }
 
@@ -154,6 +159,20 @@ public class MainActivity extends AppCompatActivity {
             intent.putExtra("CourseId", courseInfo.getId());
         }
         startActivity(intent);
+    }
+
+    private void showDeleteTipDialog(View view, CourseInfoBean courseInfoBean) {
+        if (null == mDialog) {
+            AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
+                    .setMessage("删除后，该课程将从课程表中移除")
+                    .setPositiveButton("删除", (dialog1, which) -> {
+                        mCourseViewModel.deleteCourseInfo(courseInfoBean);
+                        mTableLayout.removeView(view);
+                    })
+                    .setNegativeButton("取消", (dialog12, which) -> dialog12.dismiss());
+            mDialog = dialog.show();
+        }
+        mDialog.show();
     }
 
     @Override

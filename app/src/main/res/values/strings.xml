@@ -16,6 +16,9 @@
     <string name="is_odd_week_or_even_week">是否单双周</string>
     <string name="odd">单周</string>
     <string name="even">双周</string>
+    <string name="add_new_course">新增课程信息</string>
+    <string name="edit_course_info">编辑课程信息</string>
+    <string name="delete_course_info">删除课程信息</string>
 
     <array name="colors">
         <item>course_bg_blue</item>

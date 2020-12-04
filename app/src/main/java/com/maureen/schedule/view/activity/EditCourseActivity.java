@@ -1,5 +1,6 @@
 package com.maureen.schedule.view.activity;
 
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
@@ -13,13 +14,17 @@ import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
-
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.ViewModelProvider;
+import android.widget.Toast;
 
 import com.maureen.schedule.CourseViewModel;
 import com.maureen.schedule.R;
 import com.maureen.schedule.data.CourseInfoBean;
+import com.maureen.schedule.utils.DisplayUtil;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
+import androidx.lifecycle.ViewModelProvider;
 
 /**
  * Function:
@@ -34,7 +39,7 @@ public class EditCourseActivity extends AppCompatActivity implements RadioGroup.
     private EditText mCourseNameEdt, mClassroomEdt, mTeacherNameEdt, mCourseLengthEdt;
     private EditText mStartWeekIndexEdt, mEndWeekIndexEdt, mStartClassIndex;
     private boolean isEditMode;
-    private String[] weekDays;
+    private Context mContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +50,7 @@ public class EditCourseActivity extends AppCompatActivity implements RadioGroup.
             getWindow().setStatusBarColor(Color.TRANSPARENT);
         }
         setContentView(R.layout.fragment_edit_course);
+        mContext = this;
         initData();
         initView();
     }
@@ -63,6 +69,27 @@ public class EditCourseActivity extends AppCompatActivity implements RadioGroup.
     }
 
     private void initView() {
+        Toolbar toolbar = findViewById(R.id.edit_tool_bar);
+        toolbar.setTitle(isEditMode ? R.string.edit_course_info : R.string.add_new_course);
+        toolbar.setPadding(0, DisplayUtil.getStatusBarHeight(mContext), 0, 0);
+        toolbar.setNavigationOnClickListener(v -> {
+            if (TextUtils.isEmpty(mCourseInfoBean.getName())) {
+                finish();
+            } else {
+                showSaveDialog();
+            }
+        });
+        toolbar.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.delete) {
+                if (TextUtils.isEmpty(mCourseInfoBean.getName())) {
+                    finish();
+                } else {
+                    showDeleteTipDialog();
+                }
+            }
+            return true;
+        });
+
         RadioGroup weekTypeRgb = findViewById(R.id.add_course_rgb_week_type);
         weekTypeRgb.setVisibility(mCourseInfoBean.getWeekType() != 0 ? View.VISIBLE : View.GONE);
         weekTypeRgb.check(mCourseInfoBean.getWeekType() == 1 ? R.id.add_course_radio_odd : R.id.add_course_radio_even);
@@ -71,10 +98,10 @@ public class EditCourseActivity extends AppCompatActivity implements RadioGroup.
         mCourseNameEdt.setText(TextUtils.isEmpty(mCourseInfoBean.getName()) ? "" : mCourseInfoBean.getName());
 
         mStartWeekIndexEdt = findViewById(R.id.edit_edt_start_week);
-        mStartWeekIndexEdt.setText(mCourseInfoBean.getBeginWeek() == 0 ? "" : String.valueOf(mCourseInfoBean.getBeginWeek()));
+        mStartWeekIndexEdt.setText(mCourseInfoBean.getBeginWeek() == 0 ? "1" : String.valueOf(mCourseInfoBean.getBeginWeek()));
 
         mEndWeekIndexEdt = findViewById(R.id.edit_edt_end_week);
-        mEndWeekIndexEdt.setText(mCourseInfoBean.getEndWeek() == 0 ? "" : String.valueOf(mCourseInfoBean.getEndWeek()));
+        mEndWeekIndexEdt.setText(mCourseInfoBean.getEndWeek() == 0 ? "18" : String.valueOf(mCourseInfoBean.getEndWeek()));
 
         mClassroomEdt = findViewById(R.id.add_course_classroom);
         mClassroomEdt.setText(TextUtils.isEmpty(mCourseInfoBean.getClassroom()) ? "" : mCourseInfoBean.getClassroom());
@@ -97,10 +124,10 @@ public class EditCourseActivity extends AppCompatActivity implements RadioGroup.
         });
 
         mStartClassIndex = findViewById(R.id.edit_edt_start_index);
-        mStartClassIndex.setText(mCourseInfoBean.getBeginTime() == 0 ? "" : String.valueOf(mCourseInfoBean.getBeginTime()));
+        mStartClassIndex.setText(mCourseInfoBean.getBeginTime() == 0 ? "1" : String.valueOf(mCourseInfoBean.getBeginTime()));
 
         mCourseLengthEdt = findViewById(R.id.edit_edt_class_length);
-        mCourseLengthEdt.setText(mCourseInfoBean.getLength() == 0 ? "" : String.valueOf(mCourseInfoBean.getLength()));
+        mCourseLengthEdt.setText(mCourseInfoBean.getLength() == 0 ? "1" : String.valueOf(mCourseInfoBean.getLength()));
 
         CheckBox isOddWeekCheck = findViewById(R.id.edit_ck_is_odd_or_even);
         isOddWeekCheck.setChecked(mCourseInfoBean.getWeekType() != 0);
@@ -109,13 +136,39 @@ public class EditCourseActivity extends AppCompatActivity implements RadioGroup.
         });
 
         Button saveToDb = findViewById(R.id.add_course_btn_save);
-        saveToDb.setOnClickListener(v -> {
-            saveCourseInfo();
-            finish();
-        });
+        saveToDb.setOnClickListener(v -> saveCourseInfo());
+    }
+
+    private void showSaveDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
+                .setMessage("是否保存课程信息")
+                .setPositiveButton("保存", (dialog1, which) -> {
+                    mCourseViewModel.saveCourseInfo(mCourseInfoBean);
+                    finish();
+                })
+                .setNegativeButton("取消", (dialog12, which) -> {
+                    dialog12.dismiss();
+                    finish();
+                });
+        dialog.show();
+    }
+
+    private void showDeleteTipDialog() {
+        AlertDialog.Builder dialog = new AlertDialog.Builder(mContext)
+                .setMessage("删除后，该课程将从课程表中移除")
+                .setPositiveButton("删除", (dialog1, which) -> {
+                    mCourseViewModel.deleteCourseInfo(mCourseInfoBean);
+                    finish();
+                })
+                .setNegativeButton("取消", (dialog12, which) -> dialog12.dismiss());
+        dialog.show();
     }
 
     private void saveCourseInfo() {
+        if (TextUtils.isEmpty(mCourseNameEdt.getText().toString())) {
+            Toast.makeText(mContext, "请输入课程名称", Toast.LENGTH_SHORT).show();
+            return;
+        }
         mCourseInfoBean.setName(mCourseNameEdt.getText().toString().trim());
         mCourseInfoBean.setBeginWeek(Integer.parseInt(mStartWeekIndexEdt.getText().toString().trim()));
         mCourseInfoBean.setEndWeek(Integer.parseInt(mEndWeekIndexEdt.getText().toString().trim()));
@@ -128,6 +181,7 @@ public class EditCourseActivity extends AppCompatActivity implements RadioGroup.
         } else {
             mCourseViewModel.saveCourseInfo(mCourseInfoBean);
         }
+        finish();
     }
 
     @Override

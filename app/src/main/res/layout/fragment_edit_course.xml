@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -8,8 +9,14 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/edit_tool_bar"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary" />
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:minHeight="?actionBarSize"
+        app:contentInsetStartWithNavigation="0dp"
+        app:menu="@menu/menu_edit_course"
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:title="@string/add_new_course"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
 
     <EditText
         android:id="@+id/add_course_name"

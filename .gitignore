@@ -8,3 +8,4 @@
 /captures
 .externalNativeBuild
 /app/schemas/com.maureen.schedule.data.AppDatabase/1.json
+/.idea/
