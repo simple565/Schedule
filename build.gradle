@@ -2,9 +2,12 @@
 
 buildscript {
     ext{
-        room_version = '2.2.5'
-        nav_version = '2.3.1'
-        kotlin_version = '1.4.20'
+        roomVersion = '2.2.5'
+        navigationVersion = '2.3.1'
+        kotlinVersion = '1.4.21'
+        materialVersion = '1.2.1'
+        lifecycleVersion = '2.2.0'
+        fragmentVersion = '1.2.5'
     }
     repositories {
         jcenter()
@@ -12,7 +15,7 @@ buildscript {
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:4.1.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
     }
 }
 

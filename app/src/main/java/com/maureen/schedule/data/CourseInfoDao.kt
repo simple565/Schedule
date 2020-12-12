@@ -1,14 +1,7 @@
-package com.maureen.schedule.data;
+package com.maureen.schedule.data
 
-import java.util.List;
-
-import androidx.lifecycle.LiveData;
-import androidx.room.Dao;
-import androidx.room.Delete;
-import androidx.room.Insert;
-import androidx.room.OnConflictStrategy;
-import androidx.room.Query;
-import androidx.room.Update;
+import androidx.lifecycle.LiveData
+import androidx.room.*
 
 /**
  * Function:
@@ -17,15 +10,14 @@ import androidx.room.Update;
  * @author lianml
  */
 @Dao
-public interface CourseInfoDao {
-
+interface CourseInfoDao {
     /**
      * 查询所有课程
      *
      * @return 所有课程列表
      */
     @Query("select * from course")
-    LiveData<List<CourseInfoBean>> getAllCourses();
+    fun getAllCourses(): LiveData<List<CourseInfoBean>>
 
     /**
      * 查找指定id的课程信息
@@ -34,7 +26,7 @@ public interface CourseInfoDao {
      * @return 课程信息
      */
     @Query("select * from course where id = :id")
-    CourseInfoBean getCourseInfoById(int id);
+    fun getCourseInfoById(id: Int): CourseInfoBean
 
     /**
      * 插入单条课程数据
@@ -42,7 +34,7 @@ public interface CourseInfoDao {
      * @param course 课程信息
      */
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void saveCourseInfo(CourseInfoBean course);
+    fun saveCourseInfo(course: CourseInfoBean)
 
     /**
      * 根据名称删除指定课程
@@ -50,7 +42,7 @@ public interface CourseInfoDao {
      * @param id 课程id
      */
     @Query("delete from course where name = :id")
-    void delCourseById(int id);
+    fun delCourseById(id: Int)
 
     /**
      * 删除指定课程
@@ -58,7 +50,7 @@ public interface CourseInfoDao {
      * @param courseInfoBean
      */
     @Delete
-    void delCourse(CourseInfoBean courseInfoBean);
+    fun delCourse(courseInfoBean: CourseInfoBean)
 
     /**
      * 批量更新课程信息
@@ -67,5 +59,5 @@ public interface CourseInfoDao {
      * @return
      */
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    int updateCourse(CourseInfoBean courseInfoBean);
+    fun updateCourse(courseInfoBean: CourseInfoBean): Int
 }
