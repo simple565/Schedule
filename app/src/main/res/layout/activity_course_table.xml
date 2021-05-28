@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_drawer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/main_tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="@color/colorPrimary"
+        android:paddingStart="10dp"
+        android:paddingEnd="10dp"
+        android:theme="@style/ToolbarTheme"
+        app:menu="@menu/menu_main"
+        app:titleTextAppearance="@style/Toolbar.TitleText" />
+
+
+    <LinearLayout
+        android:id="@+id/main_ll_week"
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:orientation="horizontal"
+        android:paddingTop="2dp"
+        android:paddingBottom="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_tool_bar">
+
+        <TextView
+            android:id="@+id/main_tv_month"
+            android:layout_width="32dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textColor="@color/textColorPrimary"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_tool_bar"
+            tools:text="11月" />
+    </LinearLayout>
+
+    <ScrollView
+        android:id="@+id/main_scroll_table"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/pageBackground"
+        android:orientation="vertical"
+        android:scrollbars="none">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/main_ll_course_count"
+                android:layout_width="32dp"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_tv_month" />
+
+            <GridLayout
+                android:id="@+id/main_gl_table"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:useDefaultMargins="true"
+                tools:ignore="RtlSymmetry" />
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

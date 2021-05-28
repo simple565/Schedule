@@ -20,6 +20,7 @@ import com.maureen.schedule.R
 import com.maureen.schedule.data.CourseInfoBean
 import com.maureen.schedule.databinding.ActivityEditCourseBinding
 import com.maureen.schedule.utils.DisplayUtil
+import com.maureen.schedule.utils.KEY_COURSE_INFO_ID
 
 
 /**
@@ -53,7 +54,8 @@ class EditCourseActivity : AppCompatActivity(), RadioGroup.OnCheckedChangeListen
         isEditMode = false
         mCourseViewModel = ViewModelProvider(this).get(CourseViewModel::class.java)
         intent?.run {
-            mCourseInfoBean = mCourseViewModel.findCourseById(intent.getIntExtra("CourseId", -1))
+            mCourseInfoBean =
+                mCourseViewModel.findCourseById(intent.getIntExtra(KEY_COURSE_INFO_ID, -1))
                     ?: run {
                         CourseInfoBean()
                     }
