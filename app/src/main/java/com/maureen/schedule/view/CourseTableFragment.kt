@@ -1,4 +1,4 @@
-package com.maureen.schedule.view.activity
+package com.maureen.schedule.view
 
 import android.content.DialogInterface
 import android.content.Intent
@@ -8,15 +8,15 @@ import android.util.Log
 import android.view.Gravity
 import android.view.View
 import android.widget.GridLayout
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.maureen.schedule.CourseViewModel
 import com.maureen.schedule.R
 import com.maureen.schedule.data.CourseInfoBean
-import com.maureen.schedule.databinding.ActivityCourseTableBinding
+import com.maureen.schedule.databinding.FragmentCourseTableBinding
 import com.maureen.schedule.utils.*
 import java.util.*
 
@@ -28,11 +28,9 @@ class CourseTableFragment : Fragment() {
     private var mWeekIndex: String? = null
     private var mMonthIndex: String? = null
 
-    private val mCourseViewModel by lazy {
-        viewModels<CourseViewModel>().value
-    }
-    private val mViewBinding by lazy {
-        ActivityCourseTableBinding.inflate(layoutInflater)
+    private val courseViewModel: CourseViewModel by viewModels()
+    private val viewBinding by lazy {
+        FragmentCourseTableBinding.inflate(layoutInflater)
     }
 
     companion object {
@@ -46,11 +44,11 @@ class CourseTableFragment : Fragment() {
     }
 
     private fun initView() {
-        with(mViewBinding.mainToolBar) {
+        with(viewBinding.mainToolBar) {
             setPadding(0, DisplayUtil.getStatusBarHeight(requireContext()), 0, 0)
             title = mWeekIndex
         }
-        mViewBinding.mainTvMonth.text = mMonthIndex
+        viewBinding.mainTvMonth.text = mMonthIndex
         // 初始化日期栏
         val weekDayViewWidth =
             (DisplayUtil.getScreenWidth(requireContext()) - DisplayUtil.dp2px(
@@ -68,19 +66,18 @@ class CourseTableFragment : Fragment() {
                 view.setBackgroundResource(R.drawable.course_bg_blue)
                 view.setTextColor(ContextCompat.getColor(requireContext(), R.color.white))
             }
-            mViewBinding.mainLlWeek.addView(view)
+            viewBinding.mainLlWeek.addView(view)
         }
 
         // 初始化节数栏
-        val countLayout = findViewById<LinearLayout>(R.id.main_ll_course_count)
         for (i in 0 until TOTAL_COURSE_COUNT) {
             val view = TextView(requireContext())
             view.height = DisplayUtil.dp2px(requireContext(), 64f)
             view.gravity = Gravity.CENTER
             view.text = (i + 1).toString()
-            countLayout.addView(view)
+            viewBinding.mainLlCourseCount.addView(view)
         }
-        with(mViewBinding.mainGlTable) {
+        with(viewBinding.mainGlTable) {
             columnCount = WEEK_LENGTH
             rowCount = TOTAL_COURSE_COUNT
         }
@@ -90,20 +87,22 @@ class CourseTableFragment : Fragment() {
     private fun initData() {
         mWeekIndex = "第一周"
         mMonthIndex = DateUtil.currentMonth
-        mCourseViewModel.getAllCourseInfo().observe(this, { courseInfoBeans: List<CourseInfoBean> ->
-            if (mCourseItemViews?.size != 0) {
-                Log.d(TAG, "initData: view map size: " + mCourseItemViews?.size)
-                mCourseItemViews?.forEach { (_, view) ->
-                    run {
-                        mViewBinding.mainGlTable.removeView(view)
+        courseViewModel.courseListLiveData.observe(
+            viewLifecycleOwner,
+            { courseInfoBeans: List<CourseInfoBean> ->
+                if (mCourseItemViews?.size != 0) {
+                    Log.d(TAG, "initData: view map size: " + mCourseItemViews?.size)
+                    mCourseItemViews?.forEach { (_, view) ->
+                        run {
+                            viewBinding.mainGlTable.removeView(view)
+                        }
                     }
                 }
-            }
-            courseInfoBeans.forEach { x ->
-                run {
-                    mViewBinding.mainGlTable.addView(mCourseItemViews?.get(x.id) ?: run {
-                        genCourseItemView(x)
-                    })
+                courseInfoBeans.forEach { x ->
+                    run {
+                        viewBinding.mainGlTable.addView(mCourseItemViews?.get(x.id) ?: run {
+                            genCourseItemView(x)
+                        })
                 }
             }
         })
@@ -129,7 +128,7 @@ class CourseTableFragment : Fragment() {
                     this.layoutParams = layoutParams
                     setOnClickListener { jumpToEditCourseInfo(null) }
                 }
-                mViewBinding.mainGlTable.addView(courseInfoView)
+                viewBinding.mainGlTable.addView(courseInfoView)
             }
         }
     }
@@ -158,7 +157,7 @@ class CourseTableFragment : Fragment() {
     }
 
     private fun jumpToEditCourseInfo(courseInfo: CourseInfoBean?) {
-        val intent = Intent(requireContext(), EditCourseActivity::class.java)
+        val intent = Intent(requireContext(), EditCourseFragment::class.java)
         courseInfo?.run {
             Log.d(TAG, "jumpToEditCourseInfo: $id")
             intent.putExtra(KEY_COURSE_INFO_ID, id)
@@ -170,15 +169,10 @@ class CourseTableFragment : Fragment() {
         AlertDialog.Builder(requireContext())
             .setMessage("删除后，该课程将从课程表中移除")
             .setPositiveButton("删除") { _: DialogInterface?, _: Int ->
-                mCourseViewModel.deleteCourseInfo(courseInfoBean)
-                mViewBinding.mainGlTable.removeView(view)
+                courseViewModel.deleteCourseInfo(courseInfoBean)
+                viewBinding.mainGlTable.removeView(view)
             }
             .setNegativeButton("取消") { dialog12: DialogInterface, _: Int -> dialog12.dismiss() }
             .show()
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        mCourseViewModel.getAllCourseInfo().removeObservers(this)
     }
 }

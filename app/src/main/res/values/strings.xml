@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Schedule</string>
+    <string name="course_table">课程表</string>
+    <string name="timetable">日程表</string>
     <string name="cancel">取消</string>
     <string name="save">保存课程</string>
     <string name="add_period">增加时间段</string>
@@ -47,4 +49,6 @@
         <item>3</item>
         <item>4</item>
     </string-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
