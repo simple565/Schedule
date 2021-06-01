@@ -14,7 +14,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(viewBinding.root)
         with(viewBinding) {
             mainVpContainer.isUserInputEnabled = false
             mainVpContainer.adapter = object : FragmentStateAdapter(this@MainActivity) {

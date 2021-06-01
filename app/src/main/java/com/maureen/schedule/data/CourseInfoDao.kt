@@ -17,7 +17,7 @@ interface CourseInfoDao {
      * @return 所有课程列表
      */
     @Query("select * from course")
-    suspend fun getAllCourses(): LiveData<List<CourseInfoBean>>
+     fun getAllCourses(): LiveData<List<CourseInfoBean>>
 
     /**
      * 查找指定id的课程信息
@@ -42,7 +42,7 @@ interface CourseInfoDao {
      * @param id 课程id
      */
     @Query("delete from course where name = :id")
-    suspend fun delCourseById(id: Int)
+     fun delCourseById(id: Int)
 
     /**
      * 删除指定课程
@@ -50,7 +50,7 @@ interface CourseInfoDao {
      * @param courseInfoBean
      */
     @Delete
-    suspend fun delCourse(courseInfoBean: CourseInfoBean)
+     fun delCourse(courseInfoBean: CourseInfoBean)
 
     /**
      * 批量更新课程信息
@@ -59,5 +59,5 @@ interface CourseInfoDao {
      * @return
      */
     @Update(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateCourse(courseInfoBean: CourseInfoBean): Int
+     fun updateCourse(courseInfoBean: CourseInfoBean): Int
 }
