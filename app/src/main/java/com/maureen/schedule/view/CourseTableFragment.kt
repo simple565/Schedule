@@ -50,10 +50,6 @@ class CourseTableFragment : Fragment() {
     }
 
     private fun initView() {
-        with(viewBinding.ctToolBar) {
-            //setPadding(0, DisplayUtil.getStatusBarHeight(requireContext()), 0, 0)
-            title = mWeekIndex
-        }
         viewBinding.ctTvMonth.text = mMonthIndex
         // 初始化日期栏
         val weekDayViewWidth =

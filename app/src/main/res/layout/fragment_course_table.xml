@@ -6,17 +6,6 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <com.google.android.material.appbar.MaterialToolbar
-        android:id="@+id/ct_tool_bar"
-        android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@color/colorPrimary"
-        android:paddingStart="10dp"
-        android:paddingEnd="10dp"
-        android:theme="@style/ToolbarTheme"
-        app:titleTextAppearance="@style/Toolbar.TitleText" />
-
-
     <LinearLayout
         android:id="@+id/ct_ll_week"
         android:layout_width="match_parent"
@@ -34,7 +23,7 @@
             tools:text="11月" />
     </LinearLayout>
 
-    <ScrollView
+    <androidx.core.widget.NestedScrollView
         android:id="@+id/ct_scroll_table"
         android:layout_width="match_parent"
         android:layout_height="0dp"
@@ -65,6 +54,6 @@
                 android:useDefaultMargins="true"
                 tools:ignore="RtlSymmetry" />
         </LinearLayout>
-    </ScrollView>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>

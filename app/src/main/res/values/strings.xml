@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">Schedule</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
     <string name="course_table">课程表</string>
     <string name="timetable">日程表</string>
     <string name="cancel">取消</string>

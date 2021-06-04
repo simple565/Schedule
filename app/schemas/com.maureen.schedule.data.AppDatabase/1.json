@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "33226ba2d7447cbe0cbf59b816a4a58f",
+    "identityHash": "9e095d320a290045ef4eadf6d864cfb9",
     "entities": [
       {
         "tableName": "course",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT, `classroom` TEXT, `teacher` TEXT, `weekTime` TEXT, `weekType` INTEGER NOT NULL, `beginWeek` INTEGER NOT NULL, `endWeek` INTEGER NOT NULL, `beginTime` INTEGER NOT NULL, `length` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `name` TEXT NOT NULL, `classroom` TEXT NOT NULL, `teacher` TEXT NOT NULL, `weekTime` TEXT NOT NULL, `weekType` INTEGER NOT NULL, `beginWeek` INTEGER NOT NULL, `endWeek` INTEGER NOT NULL, `beginTime` INTEGER NOT NULL, `length` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -18,25 +18,25 @@
             "fieldPath": "name",
             "columnName": "name",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "classroom",
             "columnName": "classroom",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "teacher",
             "columnName": "teacher",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "weekTime",
             "columnName": "weekTime",
             "affinity": "TEXT",
-            "notNull": false
+            "notNull": true
           },
           {
             "fieldPath": "weekType",
@@ -82,7 +82,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '33226ba2d7447cbe0cbf59b816a4a58f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9e095d320a290045ef4eadf6d864cfb9')"
     ]
   }
 }

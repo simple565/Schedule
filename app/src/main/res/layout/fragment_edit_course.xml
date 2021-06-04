@@ -16,8 +16,7 @@
         app:contentInsetStartWithNavigation="0dp"
         app:menu="@menu/menu_edit_course"
         app:navigationIcon="@drawable/ic_arrow_back_24"
-        app:title="@string/add_new_course"
-        app:titleTextAppearance="@style/Toolbar.TitleText" />
+        app:title="@string/add_new_course" />
 
     <EditText
         android:id="@+id/add_course_name"
