@@ -1,3 +1,14 @@
 <resources>
 
+    <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/light_blue_500</item>
+        <item name="colorPrimaryDark">@color/black</item>
+        <item name="colorSecondary">@color/teal_500</item>
+        <item name="colorOnPrimary">@color/teal_500</item>
+        <item name="colorOnSurface">@color/black</item>
+        <item name="colorAccent">@color/light_blue_700</item>
+        <item name="background">@color/dark</item>
+        <item name="colorSurface">@color/dark</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
 </resources>

@@ -8,14 +8,12 @@ import androidx.fragment.app.Fragment
 import com.maureen.schedule.databinding.FragmentScheduleBinding
 
 class ScheduleFragment : Fragment() {
-    private val viewBinding by lazy {
-        FragmentScheduleBinding.inflate(layoutInflater)
-    }
-
+    private lateinit var viewBinding: FragmentScheduleBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        viewBinding = FragmentScheduleBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
 

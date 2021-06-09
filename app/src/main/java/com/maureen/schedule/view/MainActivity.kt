@@ -1,9 +1,7 @@
 package com.maureen.schedule.view
 
 import android.os.Bundle
-import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.viewpager2.adapter.FragmentStateAdapter
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
@@ -21,15 +19,6 @@ class MainActivity : AppCompatActivity() {
         with(viewBinding) {
             with(mainToolBar) {
                 setSupportActionBar(this)
-            }
-            with(mainDrawableLayout) {
-                val toggle = ActionBarDrawerToggle(
-                    this@MainActivity, mainDrawableLayout, mainToolBar,
-                    R.string.navigation_drawer_open, R.string.navigation_drawer_close
-                )
-                addDrawerListener(toggle)
-                toggle.syncState()
-                setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
             }
             mainVpContainer.adapter = object : FragmentStateAdapter(this@MainActivity) {
                 override fun getItemCount(): Int {
