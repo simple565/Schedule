@@ -5,15 +5,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.maureen.schedule.databinding.FragmentScheduleBinding
+import com.maureen.schedule.databinding.FragmentTimeTableBinding
 
-class ScheduleFragment : Fragment() {
-    private lateinit var viewBinding: FragmentScheduleBinding
+class TimeTableFragment : Fragment() {
+    private lateinit var viewBinding: FragmentTimeTableBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        viewBinding = FragmentScheduleBinding.inflate(inflater, container, false)
+        viewBinding = FragmentTimeTableBinding.inflate(inflater, container, false)
         return viewBinding.root
     }
 

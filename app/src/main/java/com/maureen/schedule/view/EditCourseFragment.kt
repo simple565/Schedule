@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.text.TextUtils
 import android.util.Log
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
@@ -15,7 +14,6 @@ import androidx.fragment.app.Fragment
 import com.maureen.schedule.R
 import com.maureen.schedule.data.CourseInfoBean
 import com.maureen.schedule.databinding.FragmentEditCourseBinding
-import com.maureen.schedule.utils.DisplayUtil
 
 
 /**
@@ -53,19 +51,6 @@ class EditCourseFragment : Fragment(), RadioGroup.OnCheckedChangeListener {
     }
 
     private fun initView() {
-        with(viewBinding.editToolBar) {
-            setTitle(if (isEditMode) R.string.edit_course_info else R.string.add_new_course)
-            setPadding(0, DisplayUtil.getStatusBarHeight(requireContext()), 0, 0)
-            setNavigationOnClickListener {
-                //if (TextUtils.isEmpty(mCourseInfoBean!!.name)) finish() else showSaveDialog()
-            }
-            setOnMenuItemClickListener { item: MenuItem ->
-                if (item.itemId == R.id.delete) {
-                    //if (TextUtils.isEmpty(mCourseInfoBean!!.name)) finish() else showDeleteTipDialog()
-                }
-                true
-            }
-        }
         mCourseInfoBean?.run {
             viewBinding.addCourseRgbWeekType.visibility =
                 if (weekType != 0) View.VISIBLE else View.GONE
