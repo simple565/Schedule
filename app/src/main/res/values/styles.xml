@@ -1,0 +1,16 @@
+<resources>
+
+    <style name="ToolbarPopupTheme" parent="Widget.AppCompat.Light.PopupMenu.Overflow">
+        <item name="overlapAnchor">false</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="SmallChipStyle" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipCornerRadius">6dp</item>
+        <item name="chipBackgroundColor">@color/bg_chip</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="android:textColor">@color/gray_500</item>
+        <item name="chipStrokeColor">@color/transparent</item>
+    </style>
+
+</resources>

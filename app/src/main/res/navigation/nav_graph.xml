@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph.xml"
+    app:startDestination="@id/taskListScreen">
+
+    <fragment
+        android:id="@+id/taskListScreen"
+        android:name="com.maureen.schedule.view.task.TasksFragment"
+        android:label="@string/task_list"
+        tools:layout="@layout/fragment_tasks">
+        <action
+            android:id="@+id/action_to_edit_task"
+            app:destination="@id/editTaskScreen" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/editTaskScreen"
+        android:name="com.maureen.schedule.view.task.EditTaskFragment"
+        android:label="@string/edit_task"
+        tools:layout="@layout/fragment_edit_task" />
+
+    <dialog
+        android:id="@+id/selectChecklistDialog"
+        android:name="com.maureen.schedule.view.task.SelectChecklistBottomSheetDialog"
+        tools:layout="@layout/dialog_bottom_sheet_select_checklist" />
+
+    <dialog
+        android:id="@+id/moreActionDialog"
+        android:name="com.maureen.schedule.view.task.MoreActionBottomSheetDialog"
+        tools:layout="@layout/dialog_bottom_sheet_more_action" />
+
+    <fragment
+        android:id="@+id/checklistScreen"
+        android:name="com.maureen.schedule.view.task.EditChecklistFragment"
+        android:label="@string/checklist"
+        tools:layout="@layout/fragment_checklist" />
+</navigation>

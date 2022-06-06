@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.task.EditTaskFragment">
+
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        android:background="?colorPrimaryDark"
+        app:layout_constraintTop_toTopOf="parent"
+        app:menu="@menu/edit_task_menu"
+        app:navigationIcon="@drawable/ic_arrow_back"
+        app:popupTheme="@style/ToolbarPopupTheme" />
+
+    <Spinner
+        android:id="@+id/sp_priority"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:entries="@array/priority_type"
+        android:spinnerMode="dropdown"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar" />
+
+    <EditText
+        android:id="@+id/edt_title"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:layout_marginHorizontal="10dp"
+        android:background="@color/white"
+        android:hint="@string/add_task_title"
+        android:inputType="text"
+        android:maxLines="1"
+        android:textSize="14sp"
+        android:textStyle="bold"
+        app:layout_constraintTop_toBottomOf="@id/sp_priority"
+        tools:ignore="Autofill" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_step"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:background="@color/white"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/edt_title" />
+
+    <EditText
+        android:id="@+id/edt_step"
+        android:layout_width="match_parent"
+        android:layout_height="36dp"
+        android:layout_marginBottom="4dp"
+        android:background="@color/white"
+        android:drawableStart="@drawable/ic_add"
+        android:hint="@string/add_task_step"
+        android:inputType="text"
+        android:maxLines="1"
+        android:paddingHorizontal="12dp"
+        android:textSize="12sp"
+        app:layout_constraintTop_toBottomOf="@id/rv_step"
+        tools:ignore="Autofill" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toBottomOf="@id/edt_step">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginVertical="1dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/choose_type"
+                android:textColor="?android:textColorPrimary"
+                app:drawableStartCompat="@drawable/ic_style" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_type"
+                style="@style/SmallChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/choose_type" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginVertical="1dp"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:paddingHorizontal="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawablePadding="5dp"
+                android:gravity="center_vertical"
+                android:text="@string/deadline"
+                android:textColor="?android:textColorPrimary"
+                app:drawableStartCompat="@drawable/ic_today" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_deadline"
+                style="@style/SmallChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/deadline_pick_date" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginVertical="1dp"
+            android:paddingHorizontal="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="@string/remind_me"
+                android:textColor="?android:textColorPrimary"
+                app:drawableStartCompat="@drawable/ic_notifications" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_notification_time"
+                style="@style/SmallChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="@string/none" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginVertical="1dp"
+            android:paddingHorizontal="12dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:drawablePadding="5dp"
+                android:gravity="center"
+                android:text="@string/repeat"
+                android:textColor="?android:textColorPrimary"
+                app:drawableStartCompat="@drawable/ic_repeat" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_repeat_mode"
+                style="@style/SmallChipStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:text="@string/none" />
+        </RelativeLayout>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_save"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginHorizontal="60dp"
+            android:layout_marginTop="10dp"
+            android:text="@string/save" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

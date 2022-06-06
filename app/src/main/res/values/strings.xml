@@ -1,0 +1,96 @@
+<resources>
+    <string name="app_name">Schedule</string>
+    <string name="save">保存</string>
+    <string name="delete">删除</string>
+    <string name="edit">编辑</string>
+    <string name="cancel">取消</string>
+    <string name="switch_theme">切换主题</string>
+
+    <string name="tasks">任务</string>
+    <string name="calendar">日历</string>
+    <string name="settings">设置</string>
+
+    <string name="timetable">日程表</string>
+    <string name="task_list">任务列表</string>
+    <string name="checklist">清单列表</string>
+    <string name="task">任务</string>
+
+
+
+    <string name="add_period">增加时间段</string>
+    <string name="name">课程名称</string>
+    <string name="teacher">教师(选填)</string>
+    <string name="time">上课时间</string>
+    <string name="classroom">教室(选填)</string>
+    <string name="length">节数</string>
+
+    <string name="start_week">开课周数</string>
+    <string name="end_week">结课周数</string>
+    <string name="start_class_index">开始节次</string>
+    <string name="course_length">时长</string>
+    <string name="is_odd_week_or_even_week">是否单双周</string>
+    <string name="odd">单周</string>
+    <string name="even">双周</string>
+
+    <string name="add_new_course">新增课程信息</string>
+    <string name="edit_course_info">编辑课程信息</string>
+    <string name="mark_finish">标记为已完成</string>
+
+    <array name="colors">
+        <item>course_bg_blue</item>
+        <item>course_bg_brown</item>
+        <item>course_bg_cyan</item>
+        <item>course_bg_green</item>
+        <item>course_bg_orange</item>
+        <item>course_bg_pink</item>
+        <item>course_bg_purple</item>
+        <item>course_bg_yellow</item>
+    </array>
+
+    <string-array name="weekDay">
+        <item>周一</item>
+        <item>周二</item>
+        <item>周三</item>
+        <item>周四</item>
+        <item>周五</item>
+        <item>周六</item>
+        <item>周日</item>
+    </string-array>
+
+    <string-array name="course_count">
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+    </string-array>
+
+
+    <string name="add_checklist">新增清单</string>
+    <string name="edit_checklist">编辑清单</string>
+    <string name="delete_checklist">删除清单</string>
+    <string name="add_task">新增任务</string>
+    <string name="edit_task">编辑任务</string>
+    <string name="add_task_remark">添加备注</string>
+    <string name="add_task_title">添加标题</string>
+    <string name="create_time">创建于%s</string>
+    <string name="finish_time">完成于%s</string>
+    <string name="remind_me">提醒我</string>
+    <string name="repeat">重复</string>
+    <string name="deadline">截止日期</string>
+    <string name="add_task_step">新增步骤</string>
+    <string name="type">分类</string>
+    <string name="choose_type">选择分类</string>
+    <string name="priority">优先级</string>
+    <string name="deadline_tomorrow">明天</string>
+    <string name="deadline_today">今天</string>
+    <string name="deadline_pick_date">选择日期</string>
+    <string name="more">更多</string>
+    <string name="tag_the_task">标记任务</string>
+    <string name="view_more">查看更多</string>
+    <string name="none">无</string>
+
+    <string-array name="priority_type">
+        <item>一般</item>
+        <item>重要</item>
+    </string-array>
+</resources>

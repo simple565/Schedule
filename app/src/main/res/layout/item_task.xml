@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="6dp"
+    android:layout_marginVertical="4dp"
+    android:elevation="5dp"
+    app:cardCornerRadius="6dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="42dp"
+        android:layout_margin="6dp">
+
+        <CheckBox
+            android:id="@+id/cb_task_status"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:button="@drawable/bg_task_status"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_task_title"
+            android:layout_width="140dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="marquee"
+            android:maxLines="1"
+            android:textSize="14sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/cb_task_status"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="写文档" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/tv_task_deadline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4dp"
+            android:ellipsize="marquee"
+            android:singleLine="true"
+            android:textColor="@color/red_700"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf=" @id/tv_task_title"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="2021-09-30" />
+
+        <ImageView
+            android:id="@+id/tv_step_count"
+            android:layout_width="14dp"
+            android:layout_height="14dp"
+            android:layout_marginStart="4dp"
+            app:drawableStartCompat="@drawable/ic_format_list_numbered"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/tv_task_deadline"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ContentDescription" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</com.google.android.material.card.MaterialCardView>
