@@ -65,19 +65,13 @@ class TaskViewModel : ViewModel() {
     }
 
     /**
-     * 初始化三个基础清单 工作、生活、娱乐
+     * 初始基础任务清单
      */
     fun initChecklist() = viewModelScope.launch(Dispatchers.IO) {
         AppDatabase.getInstance().checklistDao().run {
             if (!hasChecklist()) {
-                val createTime = System.currentTimeMillis()
-                val checklists = listOf(
-                    Checklist(name = "工作", createTime = createTime),
-                    Checklist(name = "生活", createTime = createTime),
-                    Checklist(name = "娱乐", createTime = createTime)
-                )
-                AppDatabase.getInstance().checklistDao().addChecklists(checklists)
-                Log.d(TAG, "initChecklist: ")
+                val id = AppDatabase.getInstance().checklistDao().addChecklist(Checklist(name = "任务", createTime = System.currentTimeMillis()))
+                Log.d(TAG, "initChecklist: $id")
             }
         }
     }

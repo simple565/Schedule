@@ -24,12 +24,11 @@ class TasksFragment : Fragment() {
         return viewBinding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        initData()
-    }
 
-    private fun initData() {
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         val adapter = TaskAdapter(finishAction = { viewModel.updateTask(it) })
+            .apply { onItemLongClickListener ={ } }
         viewBinding.rvTask.adapter = adapter
         viewModel.checklistWithTaskLiveData.observe(viewLifecycleOwner) {
             Log.d(TAG, "initData: ${it.checklist.name}")

@@ -10,7 +10,6 @@
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="?colorPrimaryDark"
         app:layout_constraintTop_toTopOf="parent"
         app:menu="@menu/edit_task_menu"
         app:navigationIcon="@drawable/ic_arrow_back"

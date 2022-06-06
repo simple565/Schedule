@@ -30,9 +30,8 @@
                 android:id="@+id/tv_checklist_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="24dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="?attr/textAppearanceOverline"
@@ -43,9 +42,8 @@
                 android:id="@+id/tv_progress"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
+                android:layout_marginHorizontal="10dp"
                 android:layout_marginTop="4dp"
-                android:layout_marginEnd="24dp"
                 android:ellipsize="end"
                 android:maxLines="1"
                 android:textAppearance="?attr/textAppearanceOverline"
@@ -58,15 +56,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginHorizontal="10dp"
+                android:layout_marginVertical="8dp"
                 android:maxWidth="360dp"
                 android:progress="0"
                 android:progressTint="?attr/colorPrimary"
                 app:trackCornerRadius="8dp" />
         </LinearLayout>
+
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView

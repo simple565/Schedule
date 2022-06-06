@@ -3,8 +3,9 @@ package com.maureen.schedule.database
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.maureen.schedule.entity.Priority
+import com.maureen.schedule.entity.TaskPriority
 import com.maureen.schedule.entity.Status
+import com.maureen.schedule.entity.TaskType
 
 /**
  * Function:
@@ -35,16 +36,16 @@ data class Task(
      * 类别
      * 工作1；生活2；娱乐3；
      */
-    var type: Int = 1,
+    var type: Int = TaskType.LIFE.value,
 
     /**
      * 优先级
      * 重要（1）；一般（2）等
      */
-    var priority: Int = Priority.NORMAL.ordinal,
+    var priority: Int = TaskPriority.NORMAL.value,
     /**
      * 状态
      * 0 未完成；1 完成
      */
-    var status: Int = Status.DOING.ordinal
+    var status: Int = Status.DOING.value
 )

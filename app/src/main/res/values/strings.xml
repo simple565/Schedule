@@ -88,6 +88,7 @@
     <string name="tag_the_task">标记任务</string>
     <string name="view_more">查看更多</string>
     <string name="none">无</string>
+    <string name="select_all">全选</string>
 
     <string-array name="priority_type">
         <item>一般</item>

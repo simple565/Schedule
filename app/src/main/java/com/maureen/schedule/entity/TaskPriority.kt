@@ -5,8 +5,7 @@ package com.maureen.schedule.entity
  * @author lianml
  * Create 2022-06-03
  */
-enum class Priority {
-    NONE,
-    HIGH,
-    NORMAL
+enum class TaskPriority(val value: Int) {
+    HIGH(1),
+    NORMAL(2)
 }

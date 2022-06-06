@@ -65,7 +65,6 @@ class MainActivity : AppCompatActivity() {
                 else -> {
                     viewBinding.bottomAppBar.isVisible = true
                     viewBinding.fbAdd.show()
-
                 }
             }
         }
