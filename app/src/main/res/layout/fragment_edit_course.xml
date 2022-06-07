@@ -10,7 +10,6 @@
         android:id="@+id/edit_course_tool_bar"
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="?colorPrimaryDark"
         android:fitsSystemWindows="true" />
 
     <EditText

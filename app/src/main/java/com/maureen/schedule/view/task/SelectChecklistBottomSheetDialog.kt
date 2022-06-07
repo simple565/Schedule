@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.maureen.schedule.R
 import com.maureen.schedule.adapter.ChecklistAdapter
 import com.maureen.schedule.databinding.DialogBottomSheetSelectChecklistBinding
 import kotlinx.coroutines.flow.launchIn
@@ -25,6 +26,11 @@ class SelectChecklistBottomSheetDialog : BottomSheetDialogFragment() {
 
     private lateinit var viewBinding: DialogBottomSheetSelectChecklistBinding
     private val viewModel by activityViewModels<TaskViewModel>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setStyle(STYLE_NORMAL, R.style.BottomSheetDialog)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
