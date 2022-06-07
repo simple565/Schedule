@@ -10,7 +10,7 @@
         <item name="chipBackgroundColor">@color/bg_chip</item>
         <item name="chipStrokeWidth">1dp</item>
         <item name="android:textColor">@color/gray_500</item>
-        <item name="chipStrokeColor">@color/transparent</item>
+        <item name="chipStrokeColor">@android:color/transparent</item>
     </style>
     <style name="BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet.Modal</item>
@@ -22,6 +22,7 @@
     </style>
 
     <style name="ShapeAppearanceOverlay.BottomSheet" parent="">
-        <item name="cornerSize">24dp</item>
+        <item name="cornerSizeTopLeft">20dp</item>
+        <item name="cornerSizeTopRight">20dp</item>
     </style>
 </resources>

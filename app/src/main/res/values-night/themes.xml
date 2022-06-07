@@ -1,23 +1,28 @@
 <resources>
 
     <style name="AppTheme" parent="Theme.MaterialComponents.DayNight.NoActionBar">
-        <item name="colorPrimary">@color/blue_grey_500</item>
-        <item name="colorPrimaryVariant">@color/blue_grey_700</item>
-        <item name="colorPrimaryDark">@color/black</item>
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/brown_500</item>
+        <item name="colorPrimaryVariant">@color/brown_700</item>
+        <item name="colorPrimaryDark">@color/brown_700</item>
         <item name="colorOnPrimary">@color/black</item>
-
-        <item name="colorOnSecondary">@color/black</item>
-        <item name="colorAccent">@color/blue_grey_700</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/blue_grey_500</item>
+        <item name="colorSecondaryVariant">@color/blue_grey_700</item>
+        <item name="colorOnSecondary">@color/gray_200</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <!-- Customize your theme here. -->
+        <item name="colorAccent">@color/blue_grey_500</item>
         <item name="colorControlNormal">@color/gray_200</item>
-        <item name="android:textColorPrimary">@color/white</item>
-        <item name="android:windowLightStatusBar">true</item>
-        <item name="android:navigationBarColor">@color/black</item>
-
         <item name="colorError">@color/red_700</item>
         <item name="colorOnError">@color/white</item>
         <item name="colorSurface">@color/dark_gray</item>
         <item name="colorOnSurface">@color/white</item>
         <item name="colorOnBackground">@color/white</item>
         <item name="android:colorBackground">@color/dark_gray</item>
+        <item name="android:textColorPrimary">@color/white</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:navigationBarColor">@color/black</item>
     </style>
 </resources>

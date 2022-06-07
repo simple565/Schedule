@@ -84,18 +84,30 @@
                 android:layout_centerVertical="true"
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
-                android:text="@string/choose_type"
+                android:text="@string/priority"
                 android:textColor="?android:textColorPrimary"
-                app:drawableStartCompat="@drawable/ic_style" />
+                app:drawableStartCompat="@drawable/ic_priority_high" />
 
-            <com.google.android.material.chip.Chip
-                android:id="@+id/chip_type"
-                style="@style/SmallChipStyle"
+            <com.google.android.material.chip.ChipGroup
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
-                android:text="@string/choose_type" />
+                tools:ignore="RelativeOverlap">
 
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_priority_normal"
+                    style="@style/SmallChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_type" />
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_priority_high"
+                    style="@style/SmallChipStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/choose_type" />
+            </com.google.android.material.chip.ChipGroup>
         </RelativeLayout>
 
         <RelativeLayout
