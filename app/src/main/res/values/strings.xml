@@ -81,6 +81,8 @@
     <string name="type">分类</string>
     <string name="choose_type">选择分类</string>
     <string name="priority">优先级</string>
+    <string name="priority_normal">一般</string>
+    <string name="priority_high">重要</string>
     <string name="deadline_tomorrow">明天</string>
     <string name="deadline_today">今天</string>
     <string name="deadline_pick_date">选择日期</string>

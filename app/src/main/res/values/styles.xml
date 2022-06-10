@@ -5,13 +5,20 @@
         <item name="android:textSize">14sp</item>
     </style>
 
-    <style name="SmallChipStyle" parent="Widget.MaterialComponents.Chip.Action">
+    <style name="ChoiceChipStyle" parent="Widget.MaterialComponents.Chip.Choice">
         <item name="chipCornerRadius">6dp</item>
-        <item name="chipBackgroundColor">@color/bg_chip</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
         <item name="chipStrokeWidth">1dp</item>
-        <item name="android:textColor">@color/gray_500</item>
-        <item name="chipStrokeColor">@android:color/transparent</item>
+        <item name="chipStrokeColor">@color/bg_chip</item>
     </style>
+
+    <style name="ActionChipStyle" parent="Widget.MaterialComponents.Chip.Action">
+        <item name="chipCornerRadius">6dp</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="chipStrokeWidth">1dp</item>
+        <item name="chipStrokeColor">?colorControlNormal</item>
+    </style>
+
     <style name="BottomSheetDialog" parent="ThemeOverlay.Material3.BottomSheetDialog">
         <item name="bottomSheetStyle">@style/BottomSheet.Modal</item>
     </style>

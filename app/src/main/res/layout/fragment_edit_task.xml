@@ -15,7 +15,7 @@
         app:navigationIcon="@drawable/ic_arrow_back"
         app:popupTheme="@style/ToolbarPopupTheme" />
 
-    <Spinner
+    <androidx.appcompat.widget.AppCompatSpinner
         android:id="@+id/sp_priority"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -30,7 +30,6 @@
         android:layout_width="match_parent"
         android:layout_height="48dp"
         android:layout_marginHorizontal="10dp"
-        android:background="@color/white"
         android:hint="@string/add_task_title"
         android:inputType="text"
         android:maxLines="1"
@@ -43,7 +42,6 @@
         android:id="@+id/rv_step"
         android:layout_width="match_parent"
         android:layout_height="120dp"
-        android:background="@color/white"
         android:paddingHorizontal="12dp"
         android:paddingVertical="6dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
@@ -54,7 +52,6 @@
         android:layout_width="match_parent"
         android:layout_height="36dp"
         android:layout_marginBottom="4dp"
-        android:background="@color/white"
         android:drawableStart="@drawable/ic_add"
         android:hint="@string/add_task_step"
         android:inputType="text"
@@ -85,28 +82,35 @@
                 android:drawablePadding="5dp"
                 android:gravity="center_vertical"
                 android:text="@string/priority"
-                android:textColor="?android:textColorPrimary"
                 app:drawableStartCompat="@drawable/ic_priority_high" />
 
             <com.google.android.material.chip.ChipGroup
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_alignParentEnd="true"
+                app:checkedChip="@id/chip_priority_normal"
+                app:selectionRequired="true"
+                app:singleSelection="true"
                 tools:ignore="RelativeOverlap">
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_priority_normal"
-                    style="@style/SmallChipStyle"
+                    style="@style/ChoiceChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/choose_type" />
+                    android:checkable="true"
+                    android:checked="true"
+                    android:text="@string/priority_normal"
+                    app:checkedIconEnabled="false" />
 
                 <com.google.android.material.chip.Chip
                     android:id="@+id/chip_priority_high"
-                    style="@style/SmallChipStyle"
+                    style="@style/ChoiceChipStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/choose_type" />
+                    android:checkable="true"
+                    android:text="@string/priority_high"
+                    app:checkedIconEnabled="false" />
             </com.google.android.material.chip.ChipGroup>
         </RelativeLayout>
 
@@ -130,11 +134,12 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_deadline"
-                style="@style/SmallChipStyle"
+                style="@style/ActionChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="@string/deadline_pick_date" />
+                android:text="@string/deadline_pick_date"
+                tools:ignore="RelativeOverlap" />
 
         </RelativeLayout>
 
@@ -156,11 +161,12 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_notification_time"
-                style="@style/SmallChipStyle"
+                style="@style/ActionChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="@string/none" />
+                android:text="@string/none"
+                tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
         <RelativeLayout
@@ -181,12 +187,13 @@
 
             <com.google.android.material.chip.Chip
                 android:id="@+id/chip_repeat_mode"
-                style="@style/SmallChipStyle"
+                style="@style/ActionChipStyle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:text="@string/none" />
+                android:text="@string/none"
+                tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
         <com.google.android.material.button.MaterialButton
