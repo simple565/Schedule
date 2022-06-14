@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/editTaskScreen"
-        android:name="com.maureen.schedule.view.task.EditTaskFragment"
+        android:name="com.maureen.schedule.view.task.TaskDetailFragment"
         android:label="@string/edit_task"
         tools:layout="@layout/fragment_edit_task" />
 

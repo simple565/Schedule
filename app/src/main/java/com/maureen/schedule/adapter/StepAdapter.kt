@@ -16,8 +16,7 @@ import com.maureen.schedule.entity.Status
  * @author lianml
  * Create 2021-10-17
  */
-class StepAdapter(private val delAction: (Step) -> Unit) :
-    ListAdapter<Step, StepAdapter.ViewHolder>(diffCallback) {
+class StepAdapter : ListAdapter<Step, StepAdapter.ViewHolder>(diffCallback) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Step>() {
             override fun areItemsTheSame(oldItem: Step, newItem: Step): Boolean {
@@ -30,8 +29,13 @@ class StepAdapter(private val delAction: (Step) -> Unit) :
         }
     }
 
-    class ViewHolder(private val viewBinding: ItemStepBinding) :
-        RecyclerView.ViewHolder(viewBinding.root) {
+    private var delAction: ((Step) -> Unit)? = null
+
+    fun setStepDeleteListener(delAction: (Step) -> Unit){
+        this.delAction = delAction
+    }
+
+    class ViewHolder(private val viewBinding: ItemStepBinding) : RecyclerView.ViewHolder(viewBinding.root) {
         val statusCb = viewBinding.itemCbStepStatus
         val clearIv = viewBinding.itemIvClearStep
         fun bind(data: Step) {
@@ -47,13 +51,7 @@ class StepAdapter(private val delAction: (Step) -> Unit) :
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val viewHolder = ViewHolder(
-            ItemStepBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
-        )
+        val viewHolder = ViewHolder(ItemStepBinding.inflate(LayoutInflater.from(parent.context), parent, false))
 
         viewHolder.statusCb.setOnClickListener {
             val isChecked = (it as CheckBox).isChecked
@@ -67,7 +65,7 @@ class StepAdapter(private val delAction: (Step) -> Unit) :
             notifyItemChanged(viewHolder.adapterPosition)
         }
         viewHolder.clearIv.setOnClickListener {
-            delAction.invoke(getItem(viewHolder.adapterPosition))
+            delAction?.invoke(getItem(viewHolder.adapterPosition))
             notifyItemRemoved(viewHolder.adapterPosition)
         }
         return viewHolder

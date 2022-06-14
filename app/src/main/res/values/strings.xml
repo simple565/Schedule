@@ -16,7 +16,6 @@
     <string name="task">任务</string>
 
 
-
     <string name="add_period">增加时间段</string>
     <string name="name">课程名称</string>
     <string name="teacher">教师(选填)</string>
@@ -80,9 +79,7 @@
     <string name="add_task_step">新增步骤</string>
     <string name="type">分类</string>
     <string name="choose_type">选择分类</string>
-    <string name="priority">优先级</string>
-    <string name="priority_normal">一般</string>
-    <string name="priority_high">重要</string>
+    <string name="important_reminder">重要提醒</string>
     <string name="deadline_tomorrow">明天</string>
     <string name="deadline_today">今天</string>
     <string name="deadline_pick_date">选择日期</string>
@@ -92,8 +89,12 @@
     <string name="none">无</string>
     <string name="select_all">全选</string>
 
-    <string-array name="priority_type">
-        <item>一般</item>
-        <item>重要</item>
+    <string-array name="repeat_mode">
+        <item>不重复</item>
+        <item>每天</item>
+        <item>每周</item>
+        <item>每月</item>
+        <item>每年</item>
+        <item>自定义</item>
     </string-array>
 </resources>
