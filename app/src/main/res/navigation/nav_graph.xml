@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/taskListScreen"
-        android:name="com.maureen.schedule.view.task.TasksFragment"
+        android:name="com.maureen.schedule.view.fragment.TasksFragment"
         android:label="@string/task_list"
         tools:layout="@layout/fragment_tasks">
         <action
@@ -17,23 +17,23 @@
 
     <fragment
         android:id="@+id/editTaskScreen"
-        android:name="com.maureen.schedule.view.task.TaskDetailFragment"
+        android:name="com.maureen.schedule.view.fragment.TaskDetailFragment"
         android:label="@string/edit_task"
         tools:layout="@layout/fragment_edit_task" />
 
     <dialog
         android:id="@+id/selectChecklistDialog"
-        android:name="com.maureen.schedule.view.task.SelectChecklistBottomSheetDialog"
+        android:name="com.maureen.schedule.view.fragment.SelectChecklistBottomSheetDialog"
         tools:layout="@layout/dialog_bottom_sheet_select_checklist" />
 
     <dialog
         android:id="@+id/moreActionDialog"
-        android:name="com.maureen.schedule.view.task.MoreActionBottomSheetDialog"
+        android:name="com.maureen.schedule.view.fragment.MoreActionBottomSheetDialog"
         tools:layout="@layout/dialog_bottom_sheet_more_action" />
 
     <fragment
         android:id="@+id/checklistScreen"
-        android:name="com.maureen.schedule.view.task.EditChecklistFragment"
+        android:name="com.maureen.schedule.view.fragment.EditChecklistFragment"
         android:label="@string/checklist"
         tools:layout="@layout/fragment_checklist" />
 </navigation>

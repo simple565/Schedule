@@ -1,4 +1,4 @@
-package com.maureen.schedule.view.task
+package com.maureen.schedule
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

@@ -5,5 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:clipToPadding="false"
-    tools:context=".view.task.RepeatModeSelectFragment"
+    tools:context=".view.fragment.RepeatModeSelectFragment"
     tools:listitem="@layout/item_repeat_mode" />

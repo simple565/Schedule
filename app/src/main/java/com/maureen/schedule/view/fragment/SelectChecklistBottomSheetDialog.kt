@@ -1,4 +1,4 @@
-package com.maureen.schedule.view.task
+package com.maureen.schedule.view.fragment
 
 import android.os.Bundle
 import android.util.Log
@@ -9,6 +9,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.lifecycleScope
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.maureen.schedule.R
+import com.maureen.schedule.TaskViewModel
 import com.maureen.schedule.adapter.ChecklistAdapter
 import com.maureen.schedule.databinding.DialogBottomSheetSelectChecklistBinding
 import kotlinx.coroutines.flow.launchIn

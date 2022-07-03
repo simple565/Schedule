@@ -9,7 +9,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.maureen.schedule.R
 import com.maureen.schedule.databinding.ActivityMainBinding
 import com.maureen.schedule.utils.KEY_CHECKLIST_ID
-import com.maureen.schedule.view.task.TaskViewModel
+import com.maureen.schedule.TaskViewModel
 
 
 class MainActivity : AppCompatActivity() {

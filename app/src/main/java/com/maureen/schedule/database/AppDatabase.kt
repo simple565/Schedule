@@ -13,13 +13,9 @@ import com.maureen.schedule.utils.DATABASE_NAME
  *
  * @author lianml
  */
-@Database(
-    entities = [Step::class, Task::class,
-        Checklist::class, CourseInfo::class], version = 1
-)
+@Database(entities = [Step::class, Task::class, Checklist::class], version = 1)
 abstract class AppDatabase : RoomDatabase() {
 
-    abstract fun courseInfoDao(): CourseInfoDao
     abstract fun stepDao(): StepDao
     abstract fun taskDao(): TaskDao
     abstract fun checklistDao(): ChecklistDao

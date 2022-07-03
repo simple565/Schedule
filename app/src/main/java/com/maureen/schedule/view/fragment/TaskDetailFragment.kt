@@ -1,17 +1,17 @@
-package com.maureen.schedule.view.task
+package com.maureen.schedule.view.fragment
 
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ToggleButton
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.switchmaterial.SwitchMaterial
 import com.maureen.schedule.R
+import com.maureen.schedule.TaskViewModel
 import com.maureen.schedule.adapter.StepAdapter
 import com.maureen.schedule.database.Task
 import com.maureen.schedule.databinding.FragmentEditTaskBinding
@@ -115,11 +115,11 @@ class TaskDetailFragment : Fragment() {
         taskWithStep?.let {
             it.task.apply {
                 title = taskName
-                /*priority = if (viewBinding.chipPriorityHigh.isChecked) {
+                priority = if (viewBinding.btnImportant.isChecked) {
                     TaskPriority.HIGH.value
                 } else {
                     TaskPriority.NORMAL.value
-                }*/
+                }
 
             }
             viewModel.addTask(it)
