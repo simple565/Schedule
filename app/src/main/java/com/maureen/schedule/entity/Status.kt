@@ -7,5 +7,6 @@ package com.maureen.schedule.entity
  */
 enum class Status(val value: Int){
     DOING(0),
-    DONE(1)
+    DONE(1),
+    PLANING(2)
 }

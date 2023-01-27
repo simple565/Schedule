@@ -4,65 +4,188 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.EditChecklistFragment">
+    tools:context=".view.fragment.ChecklistFragment">
 
-    <TextView
-        android:id="@+id/tv_day"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="20dp"
-        android:includeFontPadding="false"
-        android:textSize="20sp"
-        android:textStyle="bold"
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/tool_bar"
+        android:layout_width="match_parent"
+        android:layout_height="?actionBarSize"
+        app:layout_constraintTop_toTopOf="parent"
+        app:subtitle="星期一"
+        app:title="1月23日" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_doing"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_white_corner_10"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toStartOf="@id/card_completed"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="19" />
+        app:layout_constraintTop_toBottomOf="@id/tool_bar">
 
-    <TextView
-        android:id="@+id/tv_year"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
-        android:includeFontPadding="false"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toBottomOf="@id/tv_day"
-        app:layout_constraintStart_toEndOf="@id/tv_day"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1"
-        tools:text="2022" />
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_doing"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:background="@color/blue_500"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_doing_round"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundImageStyle"
+            tools:ignore="ContentDescription" />
 
-    <TextView
-        android:id="@+id/tv_month"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:includeFontPadding="false"
-        android:textSize="12sp"
-        app:layout_constraintBottom_toTopOf="@id/tv_year"
-        app:layout_constraintStart_toStartOf="@id/tv_year"
-        tools:text="5月" />
+        <TextView
+            android:id="@+id/tv_doing"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/doing"
+            app:layout_constraintStart_toStartOf="@id/iv_doing"
+            app:layout_constraintTop_toBottomOf="@id/iv_doing" />
 
-    <TextView
-        android:id="@+id/tv_time"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/tv_doing_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_completed"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_margin="8dp"
+        android:background="@drawable/bg_white_corner_10"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@id/card_doing"
+        app:layout_constraintTop_toBottomOf="@id/tool_bar">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_completed"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:background="@color/orange_500"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_flag_round"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundImageStyle"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_completed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/completed"
+            app:layout_constraintStart_toStartOf="@id/iv_completed"
+            app:layout_constraintTop_toBottomOf="@id/iv_completed" />
+
+        <TextView
+            android:id="@+id/tv_complete_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/card_all"
+        android:layout_width="0dp"
+        android:layout_height="80dp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="12dp"
+        android:background="@drawable/bg_white_corner_10"
+        android:elevation="4dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_doing">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/iv_all"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_margin="10dp"
+            android:background="@color/gray_500"
+            android:scaleType="centerInside"
+            android:src="@drawable/ic_all_round"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:shapeAppearance="@style/RoundImageStyle"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_all"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@string/all"
+            app:layout_constraintStart_toStartOf="@id/iv_all"
+            app:layout_constraintTop_toBottomOf="@id/iv_all" />
+
+        <TextView
+            android:id="@+id/tv_all_count"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="0" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/tv_checklist_title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="10dp"
-        android:textSize="20sp"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/my_checklist"
+        android:textSize="14sp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:text="23:08" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_all" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_checklists"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="10dp"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:background="@drawable/bg_white_corner_10"
+        android:elevation="4dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_constrainedHeight="true"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_day"
+        app:layout_constraintTop_toBottomOf="@id/tv_checklist_title"
+        app:layout_constraintVertical_bias="0"
+        tools:itemCount="2"
         tools:listitem="@layout/item_checklist" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/tv_add_checklist"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="14dp"
+        android:contentDescription="@string/add_checklist"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/ic_add" />
 </androidx.constraintlayout.widget.ConstraintLayout>

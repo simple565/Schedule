@@ -1,11 +1,11 @@
 package com.maureen.schedule.adapter
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.navigation.findNavController
@@ -23,8 +23,7 @@ import com.maureen.schedule.utils.convertToDate
  * @author lianml
  * Create 2021-10-17
  */
-class TaskAdapter(private val finishAction: (Task) -> Unit) :
-    ListAdapter<Task, TaskAdapter.ViewHolder>(diffCallback) {
+class TaskAdapter : ListAdapter<Task, TaskAdapter.ViewHolder>(diffCallback) {
     companion object {
         val diffCallback = object : DiffUtil.ItemCallback<Task>() {
             override fun areItemsTheSame(oldItem: Task, newItem: Task): Boolean {
@@ -37,18 +36,15 @@ class TaskAdapter(private val finishAction: (Task) -> Unit) :
         }
     }
 
-    private var multiSelectMode = false
     var onItemLongClickListener: (() -> Unit)? = null
 
     class ViewHolder(private val viewBinding: ItemTaskBinding) :
         RecyclerView.ViewHolder(viewBinding.root) {
         val cbFinishStatus = viewBinding.cbTaskStatus
         val rootView = viewBinding.root
-        fun bind(multiSelectMode: Boolean, data: Task) {
+        fun bind(data: Task) {
             with(viewBinding) {
                 cbTaskStatus.isChecked = data.status == 1
-                cbTaskStatus.isVisible = !multiSelectMode
-                cbTaskSelectStatus.isVisible = multiSelectMode
                 if (-1L == data.finishTime) {
                     tvTaskDeadline.visibility = View.GONE
                 } else {
@@ -56,6 +52,7 @@ class TaskAdapter(private val finishAction: (Task) -> Unit) :
                 }
                 tvTaskDeadline.text = data.finishTime.convertToDate("yyyy年MM月dd日")
                 tvTaskTitle.text = data.title
+                tvTaskTitle.paintFlags = if (data.status == 1) Paint.STRIKE_THRU_TEXT_FLAG else 0
             }
         }
     }
@@ -64,20 +61,15 @@ class TaskAdapter(private val finishAction: (Task) -> Unit) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         return ViewHolder(ItemTaskBinding.inflate(LayoutInflater.from(parent.context), parent, false)).apply {
             cbFinishStatus.setOnClickListener {
-                val data = getItem(adapterPosition)
-                it as CheckBox
-                data.status = if (it.isChecked) 1 else 0
-                data.finishTime = if (it.isChecked) System.currentTimeMillis() else -1L
-                finishAction.invoke(data)
+//                finishAction.invoke(getItem(adapterPosition))
             }
             rootView.setOnClickListener {
                 val data = getItem(adapterPosition)
                 val bundle = bundleOf(KEY_TASK_ID to data.id)
-                it.findNavController().navigate(R.id.action_to_edit_task, bundle)
+                it.findNavController().navigate(R.id.editTaskScreen, bundle)
             }
             rootView.setOnLongClickListener {
                 Log.d("TAG", "onCreateViewHolder: ")
-                multiSelectMode = !multiSelectMode
                 notifyDataSetChanged()
                 onItemLongClickListener?.invoke()
                 true
@@ -86,6 +78,6 @@ class TaskAdapter(private val finishAction: (Task) -> Unit) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bind(multiSelectMode, getItem(position))
+        holder.bind(getItem(position))
     }
 }

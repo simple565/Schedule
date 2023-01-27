@@ -1,5 +1,6 @@
 package com.maureen.schedule.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.maureen.schedule.entity.ChecklistWithTask
 import kotlinx.coroutines.flow.Flow
@@ -11,6 +12,9 @@ import kotlinx.coroutines.flow.Flow
  */
 @Dao
 interface ChecklistDao {
+
+    @Query("select exists(select * from checklist where id = :id limit 1)")
+    suspend fun existChecklist(id: Long):Boolean
 
     @Query("select exists(select * from checklist limit 1)")
     suspend fun hasChecklist():Boolean
@@ -27,14 +31,17 @@ interface ChecklistDao {
     @Update
     suspend fun updateChecklist(checklist: Checklist): Int
 
+    @Query("select * from checklist where id = :id")
+    fun getChecklist(id: Long):Checklist
+
     @Query("select * from checklist")
-    fun getChecklist(): Flow<List<Checklist>>
+    fun getChecklists(): LiveData<List<Checklist>>
 
     @Transaction
     @Query("select * from checklist where id = :id")
-    suspend fun getChecklistWithTask(id: Long): ChecklistWithTask
+    fun getChecklistWithTask(id: Long): LiveData<ChecklistWithTask>
 
     @Transaction
     @Query("select * from checklist")
-    fun getAllChecklistWithTask(): Flow<List<ChecklistWithTask>>
+    fun getAllChecklistWithTask(): LiveData<List<ChecklistWithTask>>
 }

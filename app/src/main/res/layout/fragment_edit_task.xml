@@ -12,7 +12,6 @@
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
         app:layout_constraintTop_toTopOf="parent"
-        app:menu="@menu/edit_task_menu"
         app:navigationIcon="@drawable/ic_arrow_back"
         app:popupTheme="@style/ToolbarPopupTheme" />
 
@@ -121,7 +120,7 @@
                 app:layout_constraintTop_toBottomOf="@id/tv_notifications_title" />
 
             <com.google.android.material.switchmaterial.SwitchMaterial
-                android:id="@+id/btn_important"
+                android:id="@+id/swt_important"
                 android:layout_width="wrap_content"
                 android:layout_height="36dp"
                 android:checked="false"

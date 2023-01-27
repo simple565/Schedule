@@ -1,19 +1,15 @@
-ext {
-    activityKtxVersion = activityVersion
-}// Top-level build file where you can add configuration options common to all sub-projects/modules.
-
 buildscript {
     ext{
         activityVersion = '1.4.0'
         coreKtxVersion = '1.7.0'
-        coroutinesVersion = '1.6.2'
+        coroutinesVersion = '1.6.4'
         dataStoreVersion = '1.0.0'
         fragmentVersion = '1.4.1'
         lifecycleVersion = '2.4.1'
         materialVersion = '1.6.0'
         navigationVersion = '2.4.2'
-        roomVersion = '2.4.2'
-        kotlinVersion = '1.5.31'
+        roomVersion = '2.5.0'
+        kotlinVersion = '1.6.21'
         workVersion = '2.7.1'
     }
     repositories {
@@ -21,8 +17,8 @@ buildscript {
         google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.2.1'
-        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlinVersion"
+        classpath 'com.android.tools.build:gradle:7.4.0'
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.7.21"
     }
 }
 

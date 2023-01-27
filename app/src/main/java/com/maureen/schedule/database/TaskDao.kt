@@ -1,5 +1,6 @@
 package com.maureen.schedule.database
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.maureen.schedule.entity.TaskWithStep
 import kotlinx.coroutines.flow.Flow
@@ -22,9 +23,9 @@ interface TaskDao {
     suspend fun updateTask(task: Task): Int
 
     @Query("select * from task")
-    fun getTask(): Flow<List<Task>>
+    fun getTasks(): LiveData<List<Task>>
 
     @Transaction
     @Query("select * from task where id = :id")
-    fun getTaskWithStep(id: Long): Flow<TaskWithStep>
+    fun getTaskWithStep(id: Long): LiveData<TaskWithStep>
 }

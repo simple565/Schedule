@@ -31,8 +31,9 @@ class TaskDetailFragment : Fragment() {
 
     private lateinit var viewBinding: FragmentEditTaskBinding
     private val viewModel: TaskViewModel by viewModels()
-    private var taskWithStep: TaskWithStep? = null
+    private var taskWithStep = TaskWithStep(Task(createTime = System.currentTimeMillis()), mutableListOf())
     private var stepAdapter: StepAdapter = StepAdapter()
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View {
         viewBinding = FragmentEditTaskBinding.inflate(inflater, container, false)
         return viewBinding.root
@@ -48,62 +49,32 @@ class TaskDetailFragment : Fragment() {
         viewBinding.toolBar.setNavigationOnClickListener {
             findNavController().navigateUp()
         }
-        viewBinding.btnImportant.setOnClickListener {
-            taskWithStep?.let { item ->
-                item.task.priority = if ((it as SwitchMaterial).isChecked) TaskPriority.HIGH.value else TaskPriority.NORMAL.value
-            }
-        }
-        /*viewBinding.rvStep.adapter = stepAdapter
-        viewBinding.edtStep.setOnEditorActionListener { v, actionId, _ ->
-            Log.d(TAG, "initView: $actionId")
-            if (v.text.isNotEmpty() && actionId == EditorInfo.IME_ACTION_NEXT) {
-                val step = Step()
-                step.name = v.text.toString()
-                step.createTime = System.currentTimeMillis()
-                taskItem?.let {
-                    it.steps.add(step)
-                    stepAdapter.notifyItemInserted(it.steps.size)
-                }
-            }
-            v.text = ""
-            v.clearFocus()
-            false
-        }*/
         viewBinding.btnSave.setOnClickListener { saveTask() }
     }
 
-    private fun initData() = lifecycleScope.launch {
-        arguments?.let {
-            val checklistId = it.getLong(KEY_CHECKLIST_ID, 1)
-            val taskId = it.getLong(KEY_TASK_ID, -1)
-            if (-1L == taskId) {
-                Log.d(TAG, "initData: add new task")
-                viewBinding.toolBar.title = getString(R.string.add_task)
-                val task = Task().apply {
-                    this.checklistId = checklistId
-                    createTime = System.currentTimeMillis()
+    private fun initData() {
+        val checklistId = arguments?.getLong(KEY_CHECKLIST_ID, -1) ?: -1
+        val taskId = arguments?.getLong(KEY_TASK_ID, -1) ?: -1
+        if (-1L == taskId) {
+            Log.d(TAG, "initData: add new task")
+            viewBinding.toolBar.title = getString(R.string.add_task)
+            taskWithStep.task.checklistId = checklistId
+            updateView()
+        } else {
+            Log.d(TAG, "initData: edit old task $taskId")
+            viewBinding.toolBar.title = getString(R.string.edit_task)
+            viewModel.loadTaskWithSteps(taskId)
+                .observe(viewLifecycleOwner) {
+                    taskWithStep = it
+                    updateView()
                 }
-                taskWithStep = TaskWithStep(task, mutableListOf())
-                updateView(taskWithStep!!)
-            } else {
-                Log.d(TAG, "initData: edit old task $taskId")
-                viewBinding.toolBar.title = getString(R.string.edit_task)
-                viewModel.loadTaskWithSteps(taskId)
-                    .flowOn(Dispatchers.IO)
-                    .collect { data ->
-                        taskWithStep = data
-                        updateView(data)
-                    }
-            }
         }
     }
 
-    private fun updateView(data: TaskWithStep) {
-        data.let {
-            viewBinding.edtTitle.setText(it.task.title)
-            viewBinding.btnImportant.isChecked = it.task.priority == TaskPriority.HIGH.value
-            stepAdapter.submitList(it.steps)
-        }
+    private fun updateView() {
+        viewBinding.edtTitle.setText(taskWithStep.task.title)
+        viewBinding.swtImportant.isChecked = taskWithStep.task.priority == TaskPriority.HIGH.value
+        stepAdapter.submitList(taskWithStep.steps)
     }
 
     private fun saveTask() = lifecycleScope.launch {
@@ -111,19 +82,10 @@ class TaskDetailFragment : Fragment() {
         if (taskName.isEmpty()) {
             return@launch
         }
-        Log.d(TAG, "saveTask: $taskName")
-        taskWithStep?.let {
-            it.task.apply {
-                title = taskName
-                priority = if (viewBinding.btnImportant.isChecked) {
-                    TaskPriority.HIGH.value
-                } else {
-                    TaskPriority.NORMAL.value
-                }
-
-            }
-            viewModel.addTask(it)
-        }
+        taskWithStep.task.title = taskName
+        taskWithStep.task.priority = if (viewBinding.swtImportant.isChecked) TaskPriority.HIGH.value else TaskPriority.NORMAL.value
+        Log.d(TAG, "saveTask: $taskWithStep")
+        viewModel.saveTask(taskWithStep)
         findNavController().navigateUp()
     }
 }

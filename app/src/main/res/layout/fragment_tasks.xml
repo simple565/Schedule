@@ -18,42 +18,18 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            app:navigationIcon="@drawable/ic_arrow_back"
             app:title="@string/task" />
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/layout_completed_progress"
             android:layout_width="match_parent"
-            android:layout_height="72dp"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             app:layout_scrollFlags="scroll|snap|enterAlways">
 
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_checklist_name"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textAppearance="?attr/textAppearanceOverline"
-                android:textColor="@color/material_on_surface_emphasis_high_type"
-                tools:text="@tools:sample/lorem/random" />
-
-            <com.google.android.material.textview.MaterialTextView
-                android:id="@+id/tv_progress"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginHorizontal="10dp"
-                android:layout_marginTop="4dp"
-                android:ellipsize="end"
-                android:maxLines="1"
-                android:textAppearance="?attr/textAppearanceOverline"
-                android:textColor="@color/material_on_surface_emphasis_medium"
-                android:textSize="12sp"
-                tools:text="50%" />
-
             <com.google.android.material.progressindicator.LinearProgressIndicator
-                android:id="@+id/progress_bar"
+                android:id="@+id/pb_percent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -61,9 +37,20 @@
                 android:layout_marginVertical="8dp"
                 android:maxWidth="360dp"
                 android:progress="0"
-                android:progressTint="?attr/colorPrimary"
-                app:trackCornerRadius="8dp" />
-        </LinearLayout>
+                app:layout_constraintTop_toTopOf="parent"
+                app:trackCornerRadius="10dp" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/tv_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:maxLines="1"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pb_percent"
+                tools:text="50%" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -75,4 +62,13 @@
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         tools:listitem="@layout/item_task" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_add_task"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:contentDescription="@string/add_task"
+        android:src="@drawable/ic_add" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

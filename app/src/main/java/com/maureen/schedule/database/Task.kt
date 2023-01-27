@@ -45,7 +45,7 @@ data class Task(
     var priority: Int = TaskPriority.NORMAL.value,
     /**
      * 状态
-     * 0 未完成；1 完成
+     * 0 未完成；1 完成；2 计划中
      */
-    var status: Int = Status.DOING.value
+    var status: Int = Status.PLANING.value
 )
